@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity LawyerDetails.
+    -->
+    <changeSet id="20220407100355-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="lawyer_details_id"
+                                 baseTableName="rel_lawyer_details__court_case"
+                                 constraintName="fk_rel_lawyer_details__court_case__lawyer_details_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="lawyer_details"/>
+
+        <addForeignKeyConstraint baseColumnNames="court_case_id"
+                                 baseTableName="rel_lawyer_details__court_case"
+                                 constraintName="fk_rel_lawyer_details__court_case__court_case_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="court_case"/>
+    </changeSet>
+</databaseChangeLog>

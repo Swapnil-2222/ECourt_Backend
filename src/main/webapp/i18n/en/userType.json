@@ -1,0 +1,10 @@
+{
+  "eCourtApp": {
+    "UserType": {
+      "null": "",
+      "USERTYPE": "UserType",
+      "LAWYERTYPE": "LawyerType",
+      "OTHERS": "Others"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "eCourtApp": {
+    "LawyerType": {
+      "null": "",
+      "PRIVATELAWYER": "PrivateLawyer",
+      "CORPORATIONLAWYER": "CorporationLaywer"
+    }
+  }
+}

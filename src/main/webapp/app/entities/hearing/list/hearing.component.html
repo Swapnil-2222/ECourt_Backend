@@ -1,0 +1,158 @@
+<div>
+  <h2 id="page-heading" data-cy="HearingHeading">
+    <span jhiTranslate="eCourtApp.hearing.home.title">Hearings</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="eCourtApp.hearing.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-hearing"
+        [routerLink]="['/hearing/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="eCourtApp.hearing.home.createLabel"> Create a new Hearing </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="hearings?.length === 0">
+    <span jhiTranslate="eCourtApp.hearing.home.notFound">No hearings found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="hearings && hearings.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="hearingDate">
+            <span jhiTranslate="eCourtApp.hearing.hearingDate">Hearing Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="nextHearingDate">
+            <span jhiTranslate="eCourtApp.hearing.nextHearingDate">Next Hearing Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <span jhiTranslate="eCourtApp.hearing.description">Description</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="previousHearingDate">
+            <span jhiTranslate="eCourtApp.hearing.previousHearingDate">Previous Hearing Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="conclusion">
+            <span jhiTranslate="eCourtApp.hearing.conclusion">Conclusion</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="comment">
+            <span jhiTranslate="eCourtApp.hearing.comment">Comment</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="caseStatus">
+            <span jhiTranslate="eCourtApp.hearing.caseStatus">Case Status</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="freefield1">
+            <span jhiTranslate="eCourtApp.hearing.freefield1">Freefield 1</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="freefield2">
+            <span jhiTranslate="eCourtApp.hearing.freefield2">Freefield 2</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="freefield3">
+            <span jhiTranslate="eCourtApp.hearing.freefield3">Freefield 3</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="freefield4">
+            <span jhiTranslate="eCourtApp.hearing.freefield4">Freefield 4</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="freefield5">
+            <span jhiTranslate="eCourtApp.hearing.freefield5">Freefield 5</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastModifiedBy">
+            <span jhiTranslate="eCourtApp.hearing.lastModifiedBy">Last Modified By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastModified">
+            <span jhiTranslate="eCourtApp.hearing.lastModified">Last Modified</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="courtCase.landReferenceNo">
+            <span jhiTranslate="eCourtApp.hearing.courtCase">Court Case</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let hearing of hearings; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/hearing', hearing.id, 'view']">{{ hearing.id }}</a>
+          </td>
+          <td>{{ hearing.hearingDate }}</td>
+          <td>{{ hearing.nextHearingDate }}</td>
+          <td>{{ hearing.description }}</td>
+          <td>{{ hearing.previousHearingDate }}</td>
+          <td>{{ hearing.conclusion }}</td>
+          <td>{{ hearing.comment }}</td>
+          <td jhiTranslate="{{ 'eCourtApp.CaseStatus.' + hearing.caseStatus }}">{{ hearing.caseStatus }}</td>
+          <td>{{ hearing.freefield1 }}</td>
+          <td>{{ hearing.freefield2 }}</td>
+          <td>{{ hearing.freefield3 }}</td>
+          <td>{{ hearing.freefield4 }}</td>
+          <td>{{ hearing.freefield5 }}</td>
+          <td>{{ hearing.lastModifiedBy }}</td>
+          <td>{{ hearing.lastModified }}</td>
+          <td>
+            <div *ngIf="hearing.courtCase">
+              <a [routerLink]="['/court-case', hearing.courtCase?.id, 'view']">{{ hearing.courtCase?.landReferenceNo }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/hearing', hearing.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/hearing', hearing.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(hearing)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="hearings && hearings.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

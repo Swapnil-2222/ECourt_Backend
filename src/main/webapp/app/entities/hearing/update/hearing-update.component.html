@@ -1,0 +1,208 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-hearing-heading" data-cy="HearingCreateUpdateHeading" jhiTranslate="eCourtApp.hearing.home.createOrEditLabel">
+        Create or edit a Hearing
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.hearing.hearingDate" for="field_hearingDate">Hearing Date</label>
+          <input
+            type="text"
+            class="form-control"
+            name="hearingDate"
+            id="field_hearingDate"
+            data-cy="hearingDate"
+            formControlName="hearingDate"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.hearing.nextHearingDate" for="field_nextHearingDate">Next Hearing Date</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nextHearingDate"
+            id="field_nextHearingDate"
+            data-cy="nextHearingDate"
+            formControlName="nextHearingDate"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.hearing.description" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.hearing.previousHearingDate" for="field_previousHearingDate"
+            >Previous Hearing Date</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="previousHearingDate"
+            id="field_previousHearingDate"
+            data-cy="previousHearingDate"
+            formControlName="previousHearingDate"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.hearing.conclusion" for="field_conclusion">Conclusion</label>
+          <input
+            type="text"
+            class="form-control"
+            name="conclusion"
+            id="field_conclusion"
+            data-cy="conclusion"
+            formControlName="conclusion"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.hearing.comment" for="field_comment">Comment</label>
+          <input type="text" class="form-control" name="comment" id="field_comment" data-cy="comment" formControlName="comment" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.hearing.caseStatus" for="field_caseStatus">Case Status</label>
+          <select class="form-control" name="caseStatus" formControlName="caseStatus" id="field_caseStatus" data-cy="caseStatus">
+            <option [ngValue]="null">{{ 'eCourtApp.CaseStatus.null' | translate }}</option>
+            <option *ngFor="let caseStatus of caseStatusValues" [value]="caseStatus">
+              {{ 'eCourtApp.CaseStatus.' + caseStatus | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.hearing.freefield1" for="field_freefield1">Freefield 1</label>
+          <input
+            type="text"
+            class="form-control"
+            name="freefield1"
+            id="field_freefield1"
+            data-cy="freefield1"
+            formControlName="freefield1"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.hearing.freefield2" for="field_freefield2">Freefield 2</label>
+          <input
+            type="text"
+            class="form-control"
+            name="freefield2"
+            id="field_freefield2"
+            data-cy="freefield2"
+            formControlName="freefield2"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.hearing.freefield3" for="field_freefield3">Freefield 3</label>
+          <input
+            type="text"
+            class="form-control"
+            name="freefield3"
+            id="field_freefield3"
+            data-cy="freefield3"
+            formControlName="freefield3"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.hearing.freefield4" for="field_freefield4">Freefield 4</label>
+          <input
+            type="text"
+            class="form-control"
+            name="freefield4"
+            id="field_freefield4"
+            data-cy="freefield4"
+            formControlName="freefield4"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.hearing.freefield5" for="field_freefield5">Freefield 5</label>
+          <input
+            type="text"
+            class="form-control"
+            name="freefield5"
+            id="field_freefield5"
+            data-cy="freefield5"
+            formControlName="freefield5"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.hearing.lastModifiedBy" for="field_lastModifiedBy">Last Modified By</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lastModifiedBy"
+            id="field_lastModifiedBy"
+            data-cy="lastModifiedBy"
+            formControlName="lastModifiedBy"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.hearing.lastModified" for="field_lastModified">Last Modified</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lastModified"
+            id="field_lastModified"
+            data-cy="lastModified"
+            formControlName="lastModified"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.hearing.courtCase" for="field_courtCase">Court Case</label>
+          <select class="form-control" id="field_courtCase" data-cy="courtCase" name="courtCase" formControlName="courtCase">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="courtCaseOption.id === editForm.get('courtCase')!.value?.id ? editForm.get('courtCase')!.value : courtCaseOption"
+              *ngFor="let courtCaseOption of courtCasesSharedCollection; trackBy: trackCourtCaseById"
+            >
+              {{ courtCaseOption.landReferenceNo }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

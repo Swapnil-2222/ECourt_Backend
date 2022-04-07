@@ -1,0 +1,570 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-court-case-heading" data-cy="CourtCaseCreateUpdateHeading" jhiTranslate="eCourtApp.courtCase.home.createOrEditLabel">
+        Create or edit a Court Case
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.landReferenceNo" for="field_landReferenceNo">Land Reference No</label>
+          <input
+            type="text"
+            class="form-control"
+            name="landReferenceNo"
+            id="field_landReferenceNo"
+            data-cy="landReferenceNo"
+            formControlName="landReferenceNo"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.caseNo" for="field_caseNo">Case No</label>
+          <input type="text" class="form-control" name="caseNo" id="field_caseNo" data-cy="caseNo" formControlName="caseNo" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.villageName" for="field_villageName">Village Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="villageName"
+            id="field_villageName"
+            data-cy="villageName"
+            formControlName="villageName"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.accuserName" for="field_accuserName">Accuser Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="accuserName"
+            id="field_accuserName"
+            data-cy="accuserName"
+            formControlName="accuserName"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.defendantName" for="field_defendantName">Defendant Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="defendantName"
+            id="field_defendantName"
+            data-cy="defendantName"
+            formControlName="defendantName"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.accuserLawyer" for="field_accuserLawyer">Accuser Lawyer</label>
+          <input
+            type="text"
+            class="form-control"
+            name="accuserLawyer"
+            id="field_accuserLawyer"
+            data-cy="accuserLawyer"
+            formControlName="accuserLawyer"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.defendantLawyer" for="field_defendantLawyer">Defendant Lawyer</label>
+          <input
+            type="text"
+            class="form-control"
+            name="defendantLawyer"
+            id="field_defendantLawyer"
+            data-cy="defendantLawyer"
+            formControlName="defendantLawyer"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.caseOfficer" for="field_caseOfficer">Case Officer</label>
+          <input
+            type="text"
+            class="form-control"
+            name="caseOfficer"
+            id="field_caseOfficer"
+            data-cy="caseOfficer"
+            formControlName="caseOfficer"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.caseOfficerAdd" for="field_caseOfficerAdd">Case Officer Add</label>
+          <input
+            type="text"
+            class="form-control"
+            name="caseOfficerAdd"
+            id="field_caseOfficerAdd"
+            data-cy="caseOfficerAdd"
+            formControlName="caseOfficerAdd"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.totalArea" for="field_totalArea">Total Area</label>
+          <input type="text" class="form-control" name="totalArea" id="field_totalArea" data-cy="totalArea" formControlName="totalArea" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.landAcquisitionOfficerNo" for="field_landAcquisitionOfficerNo"
+            >Land Acquisition Officer No</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="landAcquisitionOfficerNo"
+            id="field_landAcquisitionOfficerNo"
+            data-cy="landAcquisitionOfficerNo"
+            formControlName="landAcquisitionOfficerNo"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.section11JudgmentNo" for="field_section11JudgmentNo"
+            >Section 11 Judgment No</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="section11JudgmentNo"
+            id="field_section11JudgmentNo"
+            data-cy="section11JudgmentNo"
+            formControlName="section11JudgmentNo"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.section4NoticeDate" for="field_section4NoticeDate"
+            >Section 4 Notice Date</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="section4NoticeDate"
+            id="field_section4NoticeDate"
+            data-cy="section4NoticeDate"
+            formControlName="section4NoticeDate"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.judgementDate" for="field_judgementDate">Judgement Date</label>
+          <input
+            type="text"
+            class="form-control"
+            name="judgementDate"
+            id="field_judgementDate"
+            data-cy="judgementDate"
+            formControlName="judgementDate"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.dateOfDecision" for="field_dateOfDecision">Date Of Decision</label>
+          <input
+            type="text"
+            class="form-control"
+            name="dateOfDecision"
+            id="field_dateOfDecision"
+            data-cy="dateOfDecision"
+            formControlName="dateOfDecision"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.caseFilingDate" for="field_caseFilingDate">Case Filing Date</label>
+          <input
+            type="text"
+            class="form-control"
+            name="caseFilingDate"
+            id="field_caseFilingDate"
+            data-cy="caseFilingDate"
+            formControlName="caseFilingDate"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.caseStatus" for="field_caseStatus">Case Status</label>
+          <select class="form-control" name="caseStatus" formControlName="caseStatus" id="field_caseStatus" data-cy="caseStatus">
+            <option [ngValue]="null">{{ 'eCourtApp.CaseStatus.null' | translate }}</option>
+            <option *ngFor="let caseStatus of caseStatusValues" [value]="caseStatus">
+              {{ 'eCourtApp.CaseStatus.' + caseStatus | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.lastHearingDate" for="field_lastHearingDate">Last Hearing Date</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lastHearingDate"
+            id="field_lastHearingDate"
+            data-cy="lastHearingDate"
+            formControlName="lastHearingDate"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.nextHearingDate" for="field_nextHearingDate">Next Hearing Date</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nextHearingDate"
+            id="field_nextHearingDate"
+            data-cy="nextHearingDate"
+            formControlName="nextHearingDate"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.natureResult" for="field_natureResult">Nature Result</label>
+          <select class="form-control" name="natureResult" formControlName="natureResult" id="field_natureResult" data-cy="natureResult">
+            <option [ngValue]="null">{{ 'eCourtApp.NatureResult.null' | translate }}</option>
+            <option *ngFor="let natureResult of natureResultValues" [value]="natureResult">
+              {{ 'eCourtApp.NatureResult.' + natureResult | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.amountDepositeInCourt" for="field_amountDepositeInCourt"
+            >Amount Deposite In Court</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="amountDepositeInCourt"
+            id="field_amountDepositeInCourt"
+            data-cy="amountDepositeInCourt"
+            formControlName="amountDepositeInCourt"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.claimAmount" for="field_claimAmount">Claim Amount</label>
+          <input
+            type="text"
+            class="form-control"
+            name="claimAmount"
+            id="field_claimAmount"
+            data-cy="claimAmount"
+            formControlName="claimAmount"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.depositedChequeNo" for="field_depositedChequeNo"
+            >Deposited Cheque No</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="depositedChequeNo"
+            id="field_depositedChequeNo"
+            data-cy="depositedChequeNo"
+            formControlName="depositedChequeNo"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.depositedchequeDate" for="field_depositedchequeDate"
+            >Depositedcheque Date</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="depositedchequeDate"
+            id="field_depositedchequeDate"
+            data-cy="depositedchequeDate"
+            formControlName="depositedchequeDate"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.addInterestAmountDistCourt" for="field_addInterestAmountDistCourt"
+            >Add Interest Amount Dist Court</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="addInterestAmountDistCourt"
+            id="field_addInterestAmountDistCourt"
+            data-cy="addInterestAmountDistCourt"
+            formControlName="addInterestAmountDistCourt"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.addInterestApplicationNo" for="field_addInterestApplicationNo"
+            >Add Interest Application No</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="addInterestApplicationNo"
+            id="field_addInterestApplicationNo"
+            data-cy="addInterestApplicationNo"
+            formControlName="addInterestApplicationNo"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.addIntChequeNo" for="field_addIntChequeNo">Add Int Cheque No</label>
+          <input
+            type="text"
+            class="form-control"
+            name="addIntChequeNo"
+            id="field_addIntChequeNo"
+            data-cy="addIntChequeNo"
+            formControlName="addIntChequeNo"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.addIntChequeDate" for="field_addIntChequeDate"
+            >Add Int Cheque Date</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="addIntChequeDate"
+            id="field_addIntChequeDate"
+            data-cy="addIntChequeDate"
+            formControlName="addIntChequeDate"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.bankGuaranteeAppNo" for="field_bankGuaranteeAppNo"
+            >Bank Guarantee App No</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="bankGuaranteeAppNo"
+            id="field_bankGuaranteeAppNo"
+            data-cy="bankGuaranteeAppNo"
+            formControlName="bankGuaranteeAppNo"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.courtName" for="field_courtName">Court Name</label>
+          <input type="text" class="form-control" name="courtName" id="field_courtName" data-cy="courtName" formControlName="courtName" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.courtType" for="field_courtType">Court Type</label>
+          <select class="form-control" name="courtType" formControlName="courtType" id="field_courtType" data-cy="courtType">
+            <option [ngValue]="null">{{ 'eCourtApp.CourtType.null' | translate }}</option>
+            <option *ngFor="let courtType of courtTypeValues" [value]="courtType">
+              {{ 'eCourtApp.CourtType.' + courtType | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.isActivated" for="field_isActivated">Is Activated</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isActivated"
+            id="field_isActivated"
+            data-cy="isActivated"
+            formControlName="isActivated"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.freefield1" for="field_freefield1">Freefield 1</label>
+          <input
+            type="text"
+            class="form-control"
+            name="freefield1"
+            id="field_freefield1"
+            data-cy="freefield1"
+            formControlName="freefield1"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.freefield2" for="field_freefield2">Freefield 2</label>
+          <input
+            type="text"
+            class="form-control"
+            name="freefield2"
+            id="field_freefield2"
+            data-cy="freefield2"
+            formControlName="freefield2"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.freefield3" for="field_freefield3">Freefield 3</label>
+          <input
+            type="text"
+            class="form-control"
+            name="freefield3"
+            id="field_freefield3"
+            data-cy="freefield3"
+            formControlName="freefield3"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.freefield4" for="field_freefield4">Freefield 4</label>
+          <input
+            type="text"
+            class="form-control"
+            name="freefield4"
+            id="field_freefield4"
+            data-cy="freefield4"
+            formControlName="freefield4"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.freefield5" for="field_freefield5">Freefield 5</label>
+          <input
+            type="text"
+            class="form-control"
+            name="freefield5"
+            id="field_freefield5"
+            data-cy="freefield5"
+            formControlName="freefield5"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.freefield6" for="field_freefield6">Freefield 6</label>
+          <input
+            type="text"
+            class="form-control"
+            name="freefield6"
+            id="field_freefield6"
+            data-cy="freefield6"
+            formControlName="freefield6"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.freefield7" for="field_freefield7">Freefield 7</label>
+          <input
+            type="text"
+            class="form-control"
+            name="freefield7"
+            id="field_freefield7"
+            data-cy="freefield7"
+            formControlName="freefield7"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.freefield8" for="field_freefield8">Freefield 8</label>
+          <input
+            type="text"
+            class="form-control"
+            name="freefield8"
+            id="field_freefield8"
+            data-cy="freefield8"
+            formControlName="freefield8"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.freefield9" for="field_freefield9">Freefield 9</label>
+          <input
+            type="text"
+            class="form-control"
+            name="freefield9"
+            id="field_freefield9"
+            data-cy="freefield9"
+            formControlName="freefield9"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.freefield10" for="field_freefield10">Freefield 10</label>
+          <input
+            type="text"
+            class="form-control"
+            name="freefield10"
+            id="field_freefield10"
+            data-cy="freefield10"
+            formControlName="freefield10"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.lastModifiedBy" for="field_lastModifiedBy">Last Modified By</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lastModifiedBy"
+            id="field_lastModifiedBy"
+            data-cy="lastModifiedBy"
+            formControlName="lastModifiedBy"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.lastModified" for="field_lastModified">Last Modified</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lastModified"
+            id="field_lastModified"
+            data-cy="lastModified"
+            formControlName="lastModified"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.organization" for="field_organization">Organization</label>
+          <select class="form-control" id="field_organization" data-cy="organization" name="organization" formControlName="organization">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                organizationOption.id === editForm.get('organization')!.value?.id ? editForm.get('organization')!.value : organizationOption
+              "
+              *ngFor="let organizationOption of organizationsSharedCollection; trackBy: trackOrganizationById"
+            >
+              {{ organizationOption.organizationName }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

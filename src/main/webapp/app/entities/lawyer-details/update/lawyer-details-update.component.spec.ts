@@ -1,0 +1,182 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpResponse } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { of, Subject, from } from 'rxjs';
+
+import { LawyerDetailsService } from '../service/lawyer-details.service';
+import { ILawyerDetails, LawyerDetails } from '../lawyer-details.model';
+import { ICourtCase } from 'app/entities/court-case/court-case.model';
+import { CourtCaseService } from 'app/entities/court-case/service/court-case.service';
+
+import { LawyerDetailsUpdateComponent } from './lawyer-details-update.component';
+
+describe('LawyerDetails Management Update Component', () => {
+  let comp: LawyerDetailsUpdateComponent;
+  let fixture: ComponentFixture<LawyerDetailsUpdateComponent>;
+  let activatedRoute: ActivatedRoute;
+  let lawyerDetailsService: LawyerDetailsService;
+  let courtCaseService: CourtCaseService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, RouterTestingModule.withRoutes([])],
+      declarations: [LawyerDetailsUpdateComponent],
+      providers: [
+        FormBuilder,
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: from([{}]),
+          },
+        },
+      ],
+    })
+      .overrideTemplate(LawyerDetailsUpdateComponent, '')
+      .compileComponents();
+
+    fixture = TestBed.createComponent(LawyerDetailsUpdateComponent);
+    activatedRoute = TestBed.inject(ActivatedRoute);
+    lawyerDetailsService = TestBed.inject(LawyerDetailsService);
+    courtCaseService = TestBed.inject(CourtCaseService);
+
+    comp = fixture.componentInstance;
+  });
+
+  describe('ngOnInit', () => {
+    it('Should call CourtCase query and add missing value', () => {
+      const lawyerDetails: ILawyerDetails = { id: 456 };
+      const courtCases: ICourtCase[] = [{ id: 26000 }];
+      lawyerDetails.courtCases = courtCases;
+
+      const courtCaseCollection: ICourtCase[] = [{ id: 2909 }];
+      jest.spyOn(courtCaseService, 'query').mockReturnValue(of(new HttpResponse({ body: courtCaseCollection })));
+      const additionalCourtCases = [...courtCases];
+      const expectedCollection: ICourtCase[] = [...additionalCourtCases, ...courtCaseCollection];
+      jest.spyOn(courtCaseService, 'addCourtCaseToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+      activatedRoute.data = of({ lawyerDetails });
+      comp.ngOnInit();
+
+      expect(courtCaseService.query).toHaveBeenCalled();
+      expect(courtCaseService.addCourtCaseToCollectionIfMissing).toHaveBeenCalledWith(courtCaseCollection, ...additionalCourtCases);
+      expect(comp.courtCasesSharedCollection).toEqual(expectedCollection);
+    });
+
+    it('Should update editForm', () => {
+      const lawyerDetails: ILawyerDetails = { id: 456 };
+      const courtCases: ICourtCase = { id: 10997 };
+      lawyerDetails.courtCases = [courtCases];
+
+      activatedRoute.data = of({ lawyerDetails });
+      comp.ngOnInit();
+
+      expect(comp.editForm.value).toEqual(expect.objectContaining(lawyerDetails));
+      expect(comp.courtCasesSharedCollection).toContain(courtCases);
+    });
+  });
+
+  describe('save', () => {
+    it('Should call update service on save for existing entity', () => {
+      // GIVEN
+      const saveSubject = new Subject<HttpResponse<LawyerDetails>>();
+      const lawyerDetails = { id: 123 };
+      jest.spyOn(lawyerDetailsService, 'update').mockReturnValue(saveSubject);
+      jest.spyOn(comp, 'previousState');
+      activatedRoute.data = of({ lawyerDetails });
+      comp.ngOnInit();
+
+      // WHEN
+      comp.save();
+      expect(comp.isSaving).toEqual(true);
+      saveSubject.next(new HttpResponse({ body: lawyerDetails }));
+      saveSubject.complete();
+
+      // THEN
+      expect(comp.previousState).toHaveBeenCalled();
+      expect(lawyerDetailsService.update).toHaveBeenCalledWith(lawyerDetails);
+      expect(comp.isSaving).toEqual(false);
+    });
+
+    it('Should call create service on save for new entity', () => {
+      // GIVEN
+      const saveSubject = new Subject<HttpResponse<LawyerDetails>>();
+      const lawyerDetails = new LawyerDetails();
+      jest.spyOn(lawyerDetailsService, 'create').mockReturnValue(saveSubject);
+      jest.spyOn(comp, 'previousState');
+      activatedRoute.data = of({ lawyerDetails });
+      comp.ngOnInit();
+
+      // WHEN
+      comp.save();
+      expect(comp.isSaving).toEqual(true);
+      saveSubject.next(new HttpResponse({ body: lawyerDetails }));
+      saveSubject.complete();
+
+      // THEN
+      expect(lawyerDetailsService.create).toHaveBeenCalledWith(lawyerDetails);
+      expect(comp.isSaving).toEqual(false);
+      expect(comp.previousState).toHaveBeenCalled();
+    });
+
+    it('Should set isSaving to false on error', () => {
+      // GIVEN
+      const saveSubject = new Subject<HttpResponse<LawyerDetails>>();
+      const lawyerDetails = { id: 123 };
+      jest.spyOn(lawyerDetailsService, 'update').mockReturnValue(saveSubject);
+      jest.spyOn(comp, 'previousState');
+      activatedRoute.data = of({ lawyerDetails });
+      comp.ngOnInit();
+
+      // WHEN
+      comp.save();
+      expect(comp.isSaving).toEqual(true);
+      saveSubject.error('This is an error!');
+
+      // THEN
+      expect(lawyerDetailsService.update).toHaveBeenCalledWith(lawyerDetails);
+      expect(comp.isSaving).toEqual(false);
+      expect(comp.previousState).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Tracking relationships identifiers', () => {
+    describe('trackCourtCaseById', () => {
+      it('Should return tracked CourtCase primary key', () => {
+        const entity = { id: 123 };
+        const trackResult = comp.trackCourtCaseById(0, entity);
+        expect(trackResult).toEqual(entity.id);
+      });
+    });
+  });
+
+  describe('Getting selected relationships', () => {
+    describe('getSelectedCourtCase', () => {
+      it('Should return option if no CourtCase is selected', () => {
+        const option = { id: 123 };
+        const result = comp.getSelectedCourtCase(option);
+        expect(result === option).toEqual(true);
+      });
+
+      it('Should return selected CourtCase for according option', () => {
+        const option = { id: 123 };
+        const selected = { id: 123 };
+        const selected2 = { id: 456 };
+        const result = comp.getSelectedCourtCase(option, [selected2, selected]);
+        expect(result === selected).toEqual(true);
+        expect(result === selected2).toEqual(false);
+        expect(result === option).toEqual(false);
+      });
+
+      it('Should return option if this CourtCase is not selected', () => {
+        const option = { id: 123 };
+        const selected = { id: 456 };
+        const result = comp.getSelectedCourtCase(option, [selected]);
+        expect(result === option).toEqual(true);
+        expect(result === selected).toEqual(false);
+      });
+    });
+  });
+});

@@ -1,0 +1,143 @@
+entity CourtCase {
+    landReferenceNo String 
+	caseNo String
+    villageName String
+    accuserName String
+    defendantName String
+    accuserLawyer String
+    defendantLawyer String
+    caseOfficer String
+    caseOfficerAdd String//न्यायालयीन प्रकरण हाताळणारे अधिकारी/ कार्यालय
+    totalArea String
+    landAcquisitionOfficerNo String
+    section11JudgmentNo String
+    section4NoticeDate String
+    judgementDate String //final hearing date
+    dateOfDecision String //confirm this
+    caseFilingDate String
+    caseStatus CaseStatus 
+    lastHearingDate String
+    nextHearingDate String
+    natureResult NatureResult
+    amountDepositeInCourt String
+    claimAmount String //दाव्याची एकूण रक्कम
+    depositedChequeNo String//जमा केलेल्या रकमेचा धनादेश क्र.
+    depositedchequeDate String//जमा केलेल्या रकमेचा दिनांक
+    addInterestAmountDistCourt String//जिल्हा न्यायालयात जमा केलेली अतिरीक्त व्याजाची  रक्कम 
+    addInterestApplicationNo String// अतिरीक्त व्याजासाठी दाखल दरखास्त क्र.
+    addIntChequeNo String//जिल्हा न्यायालयात जमा केलेली अतिरीक्त व्याजाची  रक्कम.
+    addIntChequeDate String//जिल्हा न्यायालयात जमा केलेली अतिरीक्त व्याजाची जमा केलेल्या रकमेचा दिनांक
+    bankGuaranteeAppNo String
+    courtName String
+    courtType CourtType
+    isActivated Boolean
+    freefield1 String
+	freefield2 String
+	freefield3 String
+	freefield4 String
+	freefield5 String
+    freefield6 String
+	freefield7 String
+	freefield8 String
+	freefield9 String
+	freefield10 String
+    lastModifiedBy String
+    lastModified String
+}
+
+entity Hearing {
+	hearingDate String
+	nextHearingDate String
+	description String
+	previousHearingDate String
+	conclusion String
+	comment String
+	caseStatus CaseStatus//change in enum
+	freefield1 String
+	freefield2 String
+	freefield3 String
+	freefield4 String
+	freefield5 String
+    lastModifiedBy String
+    lastModified String
+}
+
+entity LawyerDetails{
+	fullName String
+    contactNo String
+    emailId String
+    barRegnNo String
+    address String
+    lawyerExperience String
+    freefield1 String
+	freefield2 String
+    userType UserType
+    lawyerType LawyerType
+    isActivated Boolean
+    lastModifiedBy String
+    lastModified String
+}
+
+entity Organization{
+	organizationName String
+    contactNo String
+    address String
+    emailAddress String
+    pincode String
+    website String
+    freefield1 String
+	freefield2 String
+    isActivated Boolean
+    lastModifiedBy String
+    lastModified String
+    createdOn String
+}
+enum UserType{
+	USERTYPE(UserType)
+    LAWYERTYPE(LawyerType)
+    OTHERS(Others)
+}
+
+enum CaseStatus{
+	CREATED(Created) 
+    ONPROGRESS(OnProgress)
+    CLEARED(Cleared)
+}
+
+enum CourtType{
+	DISTRICTCOURT(DistrictCourt) 
+    HIGHCOURT(HighCourt)
+    OTHERS(Others)
+}
+enum NatureResult{
+	JUDGEMENT(judgement) 
+    OTHERS(Others)
+}
+enum LawyerType{
+	PRIVATELAWYER(PrivateLawyer)
+    CORPORATIONLAWYER(CorporationLaywer)
+}
+
+relationship ManyToOne {
+	// Hearing{case} to CourtCase
+    Hearing{courtCase(landReferenceNo)} to CourtCase 
+    CourtCase{organization(organizationName)} to Organization
+}
+relationship ManyToMany {
+   LawyerDetails{courtCase(landReferenceNo)} to CourtCase{lawyerDetails(lawyerName)}
+}
+
+
+
+// Set pagination options
+paginate * with infinite-scroll
+paginate * with pagination
+
+// Use Data Transfer Objects (DTO)
+ dto * with mapstruct
+
+// Set service options to all except few
+service * with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

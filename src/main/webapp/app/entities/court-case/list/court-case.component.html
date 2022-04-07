@@ -1,0 +1,281 @@
+<div>
+  <h2 id="page-heading" data-cy="CourtCaseHeading">
+    <span jhiTranslate="eCourtApp.courtCase.home.title">Court Cases</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="eCourtApp.courtCase.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-court-case"
+        [routerLink]="['/court-case/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="eCourtApp.courtCase.home.createLabel"> Create a new Court Case </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="courtCases?.length === 0">
+    <span jhiTranslate="eCourtApp.courtCase.home.notFound">No courtCases found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="courtCases && courtCases.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="landReferenceNo">
+            <span jhiTranslate="eCourtApp.courtCase.landReferenceNo">Land Reference No</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="caseNo">
+            <span jhiTranslate="eCourtApp.courtCase.caseNo">Case No</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="villageName">
+            <span jhiTranslate="eCourtApp.courtCase.villageName">Village Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accuserName">
+            <span jhiTranslate="eCourtApp.courtCase.accuserName">Accuser Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="defendantName">
+            <span jhiTranslate="eCourtApp.courtCase.defendantName">Defendant Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="accuserLawyer">
+            <span jhiTranslate="eCourtApp.courtCase.accuserLawyer">Accuser Lawyer</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="defendantLawyer">
+            <span jhiTranslate="eCourtApp.courtCase.defendantLawyer">Defendant Lawyer</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="caseOfficer">
+            <span jhiTranslate="eCourtApp.courtCase.caseOfficer">Case Officer</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="caseOfficerAdd">
+            <span jhiTranslate="eCourtApp.courtCase.caseOfficerAdd">Case Officer Add</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="totalArea">
+            <span jhiTranslate="eCourtApp.courtCase.totalArea">Total Area</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="landAcquisitionOfficerNo">
+            <span jhiTranslate="eCourtApp.courtCase.landAcquisitionOfficerNo">Land Acquisition Officer No</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="section11JudgmentNo">
+            <span jhiTranslate="eCourtApp.courtCase.section11JudgmentNo">Section 11 Judgment No</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="section4NoticeDate">
+            <span jhiTranslate="eCourtApp.courtCase.section4NoticeDate">Section 4 Notice Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="judgementDate">
+            <span jhiTranslate="eCourtApp.courtCase.judgementDate">Judgement Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateOfDecision">
+            <span jhiTranslate="eCourtApp.courtCase.dateOfDecision">Date Of Decision</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="caseFilingDate">
+            <span jhiTranslate="eCourtApp.courtCase.caseFilingDate">Case Filing Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="caseStatus">
+            <span jhiTranslate="eCourtApp.courtCase.caseStatus">Case Status</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastHearingDate">
+            <span jhiTranslate="eCourtApp.courtCase.lastHearingDate">Last Hearing Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="nextHearingDate">
+            <span jhiTranslate="eCourtApp.courtCase.nextHearingDate">Next Hearing Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="natureResult">
+            <span jhiTranslate="eCourtApp.courtCase.natureResult">Nature Result</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="amountDepositeInCourt">
+            <span jhiTranslate="eCourtApp.courtCase.amountDepositeInCourt">Amount Deposite In Court</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="claimAmount">
+            <span jhiTranslate="eCourtApp.courtCase.claimAmount">Claim Amount</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="depositedChequeNo">
+            <span jhiTranslate="eCourtApp.courtCase.depositedChequeNo">Deposited Cheque No</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="depositedchequeDate">
+            <span jhiTranslate="eCourtApp.courtCase.depositedchequeDate">Depositedcheque Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="addInterestAmountDistCourt">
+            <span jhiTranslate="eCourtApp.courtCase.addInterestAmountDistCourt">Add Interest Amount Dist Court</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="addInterestApplicationNo">
+            <span jhiTranslate="eCourtApp.courtCase.addInterestApplicationNo">Add Interest Application No</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="addIntChequeNo">
+            <span jhiTranslate="eCourtApp.courtCase.addIntChequeNo">Add Int Cheque No</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="addIntChequeDate">
+            <span jhiTranslate="eCourtApp.courtCase.addIntChequeDate">Add Int Cheque Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="bankGuaranteeAppNo">
+            <span jhiTranslate="eCourtApp.courtCase.bankGuaranteeAppNo">Bank Guarantee App No</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="courtName">
+            <span jhiTranslate="eCourtApp.courtCase.courtName">Court Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="courtType">
+            <span jhiTranslate="eCourtApp.courtCase.courtType">Court Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="isActivated">
+            <span jhiTranslate="eCourtApp.courtCase.isActivated">Is Activated</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="freefield1">
+            <span jhiTranslate="eCourtApp.courtCase.freefield1">Freefield 1</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="freefield2">
+            <span jhiTranslate="eCourtApp.courtCase.freefield2">Freefield 2</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="freefield3">
+            <span jhiTranslate="eCourtApp.courtCase.freefield3">Freefield 3</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="freefield4">
+            <span jhiTranslate="eCourtApp.courtCase.freefield4">Freefield 4</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="freefield5">
+            <span jhiTranslate="eCourtApp.courtCase.freefield5">Freefield 5</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="freefield6">
+            <span jhiTranslate="eCourtApp.courtCase.freefield6">Freefield 6</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="freefield7">
+            <span jhiTranslate="eCourtApp.courtCase.freefield7">Freefield 7</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="freefield8">
+            <span jhiTranslate="eCourtApp.courtCase.freefield8">Freefield 8</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="freefield9">
+            <span jhiTranslate="eCourtApp.courtCase.freefield9">Freefield 9</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="freefield10">
+            <span jhiTranslate="eCourtApp.courtCase.freefield10">Freefield 10</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastModifiedBy">
+            <span jhiTranslate="eCourtApp.courtCase.lastModifiedBy">Last Modified By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastModified">
+            <span jhiTranslate="eCourtApp.courtCase.lastModified">Last Modified</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="organization.organizationName">
+            <span jhiTranslate="eCourtApp.courtCase.organization">Organization</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let courtCase of courtCases; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/court-case', courtCase.id, 'view']">{{ courtCase.id }}</a>
+          </td>
+          <td>{{ courtCase.landReferenceNo }}</td>
+          <td>{{ courtCase.caseNo }}</td>
+          <td>{{ courtCase.villageName }}</td>
+          <td>{{ courtCase.accuserName }}</td>
+          <td>{{ courtCase.defendantName }}</td>
+          <td>{{ courtCase.accuserLawyer }}</td>
+          <td>{{ courtCase.defendantLawyer }}</td>
+          <td>{{ courtCase.caseOfficer }}</td>
+          <td>{{ courtCase.caseOfficerAdd }}</td>
+          <td>{{ courtCase.totalArea }}</td>
+          <td>{{ courtCase.landAcquisitionOfficerNo }}</td>
+          <td>{{ courtCase.section11JudgmentNo }}</td>
+          <td>{{ courtCase.section4NoticeDate }}</td>
+          <td>{{ courtCase.judgementDate }}</td>
+          <td>{{ courtCase.dateOfDecision }}</td>
+          <td>{{ courtCase.caseFilingDate }}</td>
+          <td jhiTranslate="{{ 'eCourtApp.CaseStatus.' + courtCase.caseStatus }}">{{ courtCase.caseStatus }}</td>
+          <td>{{ courtCase.lastHearingDate }}</td>
+          <td>{{ courtCase.nextHearingDate }}</td>
+          <td jhiTranslate="{{ 'eCourtApp.NatureResult.' + courtCase.natureResult }}">{{ courtCase.natureResult }}</td>
+          <td>{{ courtCase.amountDepositeInCourt }}</td>
+          <td>{{ courtCase.claimAmount }}</td>
+          <td>{{ courtCase.depositedChequeNo }}</td>
+          <td>{{ courtCase.depositedchequeDate }}</td>
+          <td>{{ courtCase.addInterestAmountDistCourt }}</td>
+          <td>{{ courtCase.addInterestApplicationNo }}</td>
+          <td>{{ courtCase.addIntChequeNo }}</td>
+          <td>{{ courtCase.addIntChequeDate }}</td>
+          <td>{{ courtCase.bankGuaranteeAppNo }}</td>
+          <td>{{ courtCase.courtName }}</td>
+          <td jhiTranslate="{{ 'eCourtApp.CourtType.' + courtCase.courtType }}">{{ courtCase.courtType }}</td>
+          <td>{{ courtCase.isActivated }}</td>
+          <td>{{ courtCase.freefield1 }}</td>
+          <td>{{ courtCase.freefield2 }}</td>
+          <td>{{ courtCase.freefield3 }}</td>
+          <td>{{ courtCase.freefield4 }}</td>
+          <td>{{ courtCase.freefield5 }}</td>
+          <td>{{ courtCase.freefield6 }}</td>
+          <td>{{ courtCase.freefield7 }}</td>
+          <td>{{ courtCase.freefield8 }}</td>
+          <td>{{ courtCase.freefield9 }}</td>
+          <td>{{ courtCase.freefield10 }}</td>
+          <td>{{ courtCase.lastModifiedBy }}</td>
+          <td>{{ courtCase.lastModified }}</td>
+          <td>
+            <div *ngIf="courtCase.organization">
+              <a [routerLink]="['/organization', courtCase.organization?.id, 'view']">{{ courtCase.organization?.organizationName }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/court-case', courtCase.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/court-case', courtCase.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(courtCase)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="courtCases && courtCases.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,76 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="organization">
+      <h2 data-cy="organizationDetailsHeading"><span jhiTranslate="eCourtApp.organization.detail.title">Organization</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ organization.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.organization.organizationName">Organization Name</span></dt>
+        <dd>
+          <span>{{ organization.organizationName }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.organization.contactNo">Contact No</span></dt>
+        <dd>
+          <span>{{ organization.contactNo }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.organization.address">Address</span></dt>
+        <dd>
+          <span>{{ organization.address }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.organization.emailAddress">Email Address</span></dt>
+        <dd>
+          <span>{{ organization.emailAddress }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.organization.pincode">Pincode</span></dt>
+        <dd>
+          <span>{{ organization.pincode }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.organization.website">Website</span></dt>
+        <dd>
+          <span>{{ organization.website }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.organization.freefield1">Freefield 1</span></dt>
+        <dd>
+          <span>{{ organization.freefield1 }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.organization.freefield2">Freefield 2</span></dt>
+        <dd>
+          <span>{{ organization.freefield2 }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.organization.isActivated">Is Activated</span></dt>
+        <dd>
+          <span>{{ organization.isActivated }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.organization.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+          <span>{{ organization.lastModifiedBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.organization.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ organization.lastModified }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.organization.createdOn">Created On</span></dt>
+        <dd>
+          <span>{{ organization.createdOn }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/organization', organization.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
