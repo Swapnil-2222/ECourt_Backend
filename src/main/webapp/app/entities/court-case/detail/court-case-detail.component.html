@@ -1,0 +1,210 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="courtCase">
+      <h2 data-cy="courtCaseDetailsHeading"><span jhiTranslate="eCourtApp.courtCase.detail.title">Court Case</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ courtCase.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.landReferenceNo">Land Reference No</span></dt>
+        <dd>
+          <span>{{ courtCase.landReferenceNo }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.caseNo">Case No</span></dt>
+        <dd>
+          <span>{{ courtCase.caseNo }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.villageName">Village Name</span></dt>
+        <dd>
+          <span>{{ courtCase.villageName }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.accuserName">Accuser Name</span></dt>
+        <dd>
+          <span>{{ courtCase.accuserName }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.defendantName">Defendant Name</span></dt>
+        <dd>
+          <span>{{ courtCase.defendantName }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.accuserLawyer">Accuser Lawyer</span></dt>
+        <dd>
+          <span>{{ courtCase.accuserLawyer }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.defendantLawyer">Defendant Lawyer</span></dt>
+        <dd>
+          <span>{{ courtCase.defendantLawyer }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.caseOfficer">Case Officer</span></dt>
+        <dd>
+          <span>{{ courtCase.caseOfficer }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.caseOfficerAdd">Case Officer Add</span></dt>
+        <dd>
+          <span>{{ courtCase.caseOfficerAdd }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.totalArea">Total Area</span></dt>
+        <dd>
+          <span>{{ courtCase.totalArea }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.landAcquisitionOfficerNo">Land Acquisition Officer No</span></dt>
+        <dd>
+          <span>{{ courtCase.landAcquisitionOfficerNo }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.section11JudgmentNo">Section 11 Judgment No</span></dt>
+        <dd>
+          <span>{{ courtCase.section11JudgmentNo }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.section4NoticeDate">Section 4 Notice Date</span></dt>
+        <dd>
+          <span>{{ courtCase.section4NoticeDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.judgementDate">Judgement Date</span></dt>
+        <dd>
+          <span>{{ courtCase.judgementDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.dateOfDecision">Date Of Decision</span></dt>
+        <dd>
+          <span>{{ courtCase.dateOfDecision }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.caseFilingDate">Case Filing Date</span></dt>
+        <dd>
+          <span>{{ courtCase.caseFilingDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.caseStatus">Case Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'eCourtApp.CaseStatus.' + courtCase.caseStatus }}">{{ courtCase.caseStatus }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.lastHearingDate">Last Hearing Date</span></dt>
+        <dd>
+          <span>{{ courtCase.lastHearingDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.nextHearingDate">Next Hearing Date</span></dt>
+        <dd>
+          <span>{{ courtCase.nextHearingDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.natureResult">Nature Result</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'eCourtApp.NatureResult.' + courtCase.natureResult }}">{{ courtCase.natureResult }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.amountDepositeInCourt">Amount Deposite In Court</span></dt>
+        <dd>
+          <span>{{ courtCase.amountDepositeInCourt }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.claimAmount">Claim Amount</span></dt>
+        <dd>
+          <span>{{ courtCase.claimAmount }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.depositedChequeNo">Deposited Cheque No</span></dt>
+        <dd>
+          <span>{{ courtCase.depositedChequeNo }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.depositedchequeDate">Depositedcheque Date</span></dt>
+        <dd>
+          <span>{{ courtCase.depositedchequeDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.addInterestAmountDistCourt">Add Interest Amount Dist Court</span></dt>
+        <dd>
+          <span>{{ courtCase.addInterestAmountDistCourt }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.addInterestApplicationNo">Add Interest Application No</span></dt>
+        <dd>
+          <span>{{ courtCase.addInterestApplicationNo }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.addIntChequeNo">Add Int Cheque No</span></dt>
+        <dd>
+          <span>{{ courtCase.addIntChequeNo }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.addIntChequeDate">Add Int Cheque Date</span></dt>
+        <dd>
+          <span>{{ courtCase.addIntChequeDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.bankGuaranteeAppNo">Bank Guarantee App No</span></dt>
+        <dd>
+          <span>{{ courtCase.bankGuaranteeAppNo }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.courtName">Court Name</span></dt>
+        <dd>
+          <span>{{ courtCase.courtName }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.courtType">Court Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'eCourtApp.CourtType.' + courtCase.courtType }}">{{ courtCase.courtType }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.isActivated">Is Activated</span></dt>
+        <dd>
+          <span>{{ courtCase.isActivated }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.freefield1">Freefield 1</span></dt>
+        <dd>
+          <span>{{ courtCase.freefield1 }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.freefield2">Freefield 2</span></dt>
+        <dd>
+          <span>{{ courtCase.freefield2 }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.freefield3">Freefield 3</span></dt>
+        <dd>
+          <span>{{ courtCase.freefield3 }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.freefield4">Freefield 4</span></dt>
+        <dd>
+          <span>{{ courtCase.freefield4 }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.freefield5">Freefield 5</span></dt>
+        <dd>
+          <span>{{ courtCase.freefield5 }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.freefield6">Freefield 6</span></dt>
+        <dd>
+          <span>{{ courtCase.freefield6 }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.freefield7">Freefield 7</span></dt>
+        <dd>
+          <span>{{ courtCase.freefield7 }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.freefield8">Freefield 8</span></dt>
+        <dd>
+          <span>{{ courtCase.freefield8 }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.freefield9">Freefield 9</span></dt>
+        <dd>
+          <span>{{ courtCase.freefield9 }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.freefield10">Freefield 10</span></dt>
+        <dd>
+          <span>{{ courtCase.freefield10 }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+          <span>{{ courtCase.lastModifiedBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ courtCase.lastModified }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.courtCase.organization">Organization</span></dt>
+        <dd>
+          <div *ngIf="courtCase.organization">
+            <a [routerLink]="['/organization', courtCase.organization?.id, 'view']">{{ courtCase.organization?.organizationName }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/court-case', courtCase.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

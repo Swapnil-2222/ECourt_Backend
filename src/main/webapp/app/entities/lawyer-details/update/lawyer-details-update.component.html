@@ -1,0 +1,169 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-lawyer-details-heading"
+        data-cy="LawyerDetailsCreateUpdateHeading"
+        jhiTranslate="eCourtApp.lawyerDetails.home.createOrEditLabel"
+      >
+        Create or edit a Lawyer Details
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.lawyerDetails.fullName" for="field_fullName">Full Name</label>
+          <input type="text" class="form-control" name="fullName" id="field_fullName" data-cy="fullName" formControlName="fullName" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.lawyerDetails.contactNo" for="field_contactNo">Contact No</label>
+          <input type="text" class="form-control" name="contactNo" id="field_contactNo" data-cy="contactNo" formControlName="contactNo" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.lawyerDetails.emailId" for="field_emailId">Email Id</label>
+          <input type="text" class="form-control" name="emailId" id="field_emailId" data-cy="emailId" formControlName="emailId" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.lawyerDetails.barRegnNo" for="field_barRegnNo">Bar Regn No</label>
+          <input type="text" class="form-control" name="barRegnNo" id="field_barRegnNo" data-cy="barRegnNo" formControlName="barRegnNo" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.lawyerDetails.address" for="field_address">Address</label>
+          <input type="text" class="form-control" name="address" id="field_address" data-cy="address" formControlName="address" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.lawyerDetails.lawyerExperience" for="field_lawyerExperience"
+            >Lawyer Experience</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="lawyerExperience"
+            id="field_lawyerExperience"
+            data-cy="lawyerExperience"
+            formControlName="lawyerExperience"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.lawyerDetails.freefield1" for="field_freefield1">Freefield 1</label>
+          <input
+            type="text"
+            class="form-control"
+            name="freefield1"
+            id="field_freefield1"
+            data-cy="freefield1"
+            formControlName="freefield1"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.lawyerDetails.freefield2" for="field_freefield2">Freefield 2</label>
+          <input
+            type="text"
+            class="form-control"
+            name="freefield2"
+            id="field_freefield2"
+            data-cy="freefield2"
+            formControlName="freefield2"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.lawyerDetails.userType" for="field_userType">User Type</label>
+          <select class="form-control" name="userType" formControlName="userType" id="field_userType" data-cy="userType">
+            <option [ngValue]="null">{{ 'eCourtApp.UserType.null' | translate }}</option>
+            <option *ngFor="let userType of userTypeValues" [value]="userType">{{ 'eCourtApp.UserType.' + userType | translate }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.lawyerDetails.lawyerType" for="field_lawyerType">Lawyer Type</label>
+          <select class="form-control" name="lawyerType" formControlName="lawyerType" id="field_lawyerType" data-cy="lawyerType">
+            <option [ngValue]="null">{{ 'eCourtApp.LawyerType.null' | translate }}</option>
+            <option *ngFor="let lawyerType of lawyerTypeValues" [value]="lawyerType">
+              {{ 'eCourtApp.LawyerType.' + lawyerType | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.lawyerDetails.isActivated" for="field_isActivated">Is Activated</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isActivated"
+            id="field_isActivated"
+            data-cy="isActivated"
+            formControlName="isActivated"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.lawyerDetails.lastModifiedBy" for="field_lastModifiedBy"
+            >Last Modified By</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="lastModifiedBy"
+            id="field_lastModifiedBy"
+            data-cy="lastModifiedBy"
+            formControlName="lastModifiedBy"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.lawyerDetails.lastModified" for="field_lastModified">Last Modified</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lastModified"
+            id="field_lastModified"
+            data-cy="lastModified"
+            formControlName="lastModified"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label jhiTranslate="eCourtApp.lawyerDetails.courtCase" for="field_courtCases">Court Case</label>
+          <select class="form-control" id="field_courtCases" data-cy="courtCase" multiple name="courtCases" formControlName="courtCases">
+            <option
+              [ngValue]="getSelectedCourtCase(courtCaseOption, editForm.get('courtCases')!.value)"
+              *ngFor="let courtCaseOption of courtCasesSharedCollection; trackBy: trackCourtCaseById"
+            >
+              {{ courtCaseOption.landReferenceNo }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

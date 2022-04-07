@@ -1,0 +1,81 @@
+{
+  "applications": "*",
+  "changelogDate": "20220407100354",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "hearing",
+  "fields": [
+    {
+      "fieldName": "hearingDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nextHearingDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "previousHearingDate",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "conclusion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "comment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "caseStatus",
+      "fieldType": "CaseStatus",
+      "fieldValues": "CREATED (Created),ONPROGRESS (OnProgress),CLEARED (Cleared)"
+    },
+    {
+      "fieldName": "freefield1",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "freefield2",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "freefield3",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "freefield4",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "freefield5",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModified",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Hearing",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "landReferenceNo",
+      "otherEntityName": "courtCase",
+      "otherEntityRelationshipName": "hearing",
+      "relationshipName": "courtCase",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

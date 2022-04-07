@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="hearing">
+      <h2 data-cy="hearingDetailsHeading"><span jhiTranslate="eCourtApp.hearing.detail.title">Hearing</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ hearing.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.hearing.hearingDate">Hearing Date</span></dt>
+        <dd>
+          <span>{{ hearing.hearingDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.hearing.nextHearingDate">Next Hearing Date</span></dt>
+        <dd>
+          <span>{{ hearing.nextHearingDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.hearing.description">Description</span></dt>
+        <dd>
+          <span>{{ hearing.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.hearing.previousHearingDate">Previous Hearing Date</span></dt>
+        <dd>
+          <span>{{ hearing.previousHearingDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.hearing.conclusion">Conclusion</span></dt>
+        <dd>
+          <span>{{ hearing.conclusion }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.hearing.comment">Comment</span></dt>
+        <dd>
+          <span>{{ hearing.comment }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.hearing.caseStatus">Case Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'eCourtApp.CaseStatus.' + hearing.caseStatus }}">{{ hearing.caseStatus }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.hearing.freefield1">Freefield 1</span></dt>
+        <dd>
+          <span>{{ hearing.freefield1 }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.hearing.freefield2">Freefield 2</span></dt>
+        <dd>
+          <span>{{ hearing.freefield2 }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.hearing.freefield3">Freefield 3</span></dt>
+        <dd>
+          <span>{{ hearing.freefield3 }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.hearing.freefield4">Freefield 4</span></dt>
+        <dd>
+          <span>{{ hearing.freefield4 }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.hearing.freefield5">Freefield 5</span></dt>
+        <dd>
+          <span>{{ hearing.freefield5 }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.hearing.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+          <span>{{ hearing.lastModifiedBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.hearing.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ hearing.lastModified }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.hearing.courtCase">Court Case</span></dt>
+        <dd>
+          <div *ngIf="hearing.courtCase">
+            <a [routerLink]="['/court-case', hearing.courtCase?.id, 'view']">{{ hearing.courtCase?.landReferenceNo }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/hearing', hearing.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

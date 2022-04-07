@@ -1,0 +1,79 @@
+{
+  "applications": "*",
+  "changelogDate": "20220407100355",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "lawyer_details",
+  "fields": [
+    {
+      "fieldName": "fullName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "contactNo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "emailId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "barRegnNo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lawyerExperience",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "freefield1",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "freefield2",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "userType",
+      "fieldType": "UserType",
+      "fieldValues": "USERTYPE (UserType),LAWYERTYPE (LawyerType),OTHERS (Others)"
+    },
+    {
+      "fieldName": "lawyerType",
+      "fieldType": "LawyerType",
+      "fieldValues": "PRIVATELAWYER (PrivateLawyer),CORPORATIONLAWYER (CorporationLaywer)"
+    },
+    {
+      "fieldName": "isActivated",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModified",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "LawyerDetails",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "landReferenceNo",
+      "otherEntityName": "courtCase",
+      "otherEntityRelationshipName": "lawyerDetails",
+      "ownerSide": true,
+      "relationshipName": "courtCase",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,87 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="lawyerDetails">
+      <h2 data-cy="lawyerDetailsDetailsHeading"><span jhiTranslate="eCourtApp.lawyerDetails.detail.title">Lawyer Details</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ lawyerDetails.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.lawyerDetails.fullName">Full Name</span></dt>
+        <dd>
+          <span>{{ lawyerDetails.fullName }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.lawyerDetails.contactNo">Contact No</span></dt>
+        <dd>
+          <span>{{ lawyerDetails.contactNo }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.lawyerDetails.emailId">Email Id</span></dt>
+        <dd>
+          <span>{{ lawyerDetails.emailId }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.lawyerDetails.barRegnNo">Bar Regn No</span></dt>
+        <dd>
+          <span>{{ lawyerDetails.barRegnNo }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.lawyerDetails.address">Address</span></dt>
+        <dd>
+          <span>{{ lawyerDetails.address }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.lawyerDetails.lawyerExperience">Lawyer Experience</span></dt>
+        <dd>
+          <span>{{ lawyerDetails.lawyerExperience }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.lawyerDetails.freefield1">Freefield 1</span></dt>
+        <dd>
+          <span>{{ lawyerDetails.freefield1 }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.lawyerDetails.freefield2">Freefield 2</span></dt>
+        <dd>
+          <span>{{ lawyerDetails.freefield2 }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.lawyerDetails.userType">User Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'eCourtApp.UserType.' + lawyerDetails.userType }}">{{ lawyerDetails.userType }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.lawyerDetails.lawyerType">Lawyer Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'eCourtApp.LawyerType.' + lawyerDetails.lawyerType }}">{{ lawyerDetails.lawyerType }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.lawyerDetails.isActivated">Is Activated</span></dt>
+        <dd>
+          <span>{{ lawyerDetails.isActivated }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.lawyerDetails.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+          <span>{{ lawyerDetails.lastModifiedBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.lawyerDetails.lastModified">Last Modified</span></dt>
+        <dd>
+          <span>{{ lawyerDetails.lastModified }}</span>
+        </dd>
+        <dt><span jhiTranslate="eCourtApp.lawyerDetails.courtCase">Court Case</span></dt>
+        <dd>
+          <span *ngFor="let courtCase of lawyerDetails.courtCases; let last = last">
+            <a [routerLink]="['/court-case', courtCase?.id, 'view']">{{ courtCase.landReferenceNo }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/lawyer-details', lawyerDetails.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

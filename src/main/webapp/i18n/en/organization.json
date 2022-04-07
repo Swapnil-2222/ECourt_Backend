@@ -1,0 +1,35 @@
+{
+  "eCourtApp": {
+    "organization": {
+      "home": {
+        "title": "Organizations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Organization",
+        "createOrEditLabel": "Create or edit a Organization",
+        "notFound": "No Organizations found"
+      },
+      "created": "A new Organization is created with identifier {{ param }}",
+      "updated": "A Organization is updated with identifier {{ param }}",
+      "deleted": "A Organization is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Organization {{ id }}?"
+      },
+      "detail": {
+        "title": "Organization"
+      },
+      "id": "ID",
+      "organizationName": "Organization Name",
+      "contactNo": "Contact No",
+      "address": "Address",
+      "emailAddress": "Email Address",
+      "pincode": "Pincode",
+      "website": "Website",
+      "freefield1": "Freefield 1",
+      "freefield2": "Freefield 2",
+      "isActivated": "Is Activated",
+      "lastModifiedBy": "Last Modified By",
+      "lastModified": "Last Modified",
+      "createdOn": "Created On"
+    }
+  }
+}

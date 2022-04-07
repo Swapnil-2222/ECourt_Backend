@@ -1,0 +1,37 @@
+{
+  "eCourtApp": {
+    "lawyerDetails": {
+      "home": {
+        "title": "Lawyer Details",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Lawyer Details",
+        "createOrEditLabel": "Create or edit a Lawyer Details",
+        "notFound": "No Lawyer Details found"
+      },
+      "created": "A new Lawyer Details is created with identifier {{ param }}",
+      "updated": "A Lawyer Details is updated with identifier {{ param }}",
+      "deleted": "A Lawyer Details is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Lawyer Details {{ id }}?"
+      },
+      "detail": {
+        "title": "Lawyer Details"
+      },
+      "id": "ID",
+      "fullName": "Full Name",
+      "contactNo": "Contact No",
+      "emailId": "Email Id",
+      "barRegnNo": "Bar Regn No",
+      "address": "Address",
+      "lawyerExperience": "Lawyer Experience",
+      "freefield1": "Freefield 1",
+      "freefield2": "Freefield 2",
+      "userType": "User Type",
+      "lawyerType": "Lawyer Type",
+      "isActivated": "Is Activated",
+      "lastModifiedBy": "Last Modified By",
+      "lastModified": "Last Modified",
+      "courtCase": "Court Case"
+    }
+  }
+}

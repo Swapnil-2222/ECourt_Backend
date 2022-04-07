@@ -1,0 +1,38 @@
+{
+  "eCourtApp": {
+    "hearing": {
+      "home": {
+        "title": "Hearings",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Hearing",
+        "createOrEditLabel": "Create or edit a Hearing",
+        "notFound": "No Hearings found"
+      },
+      "created": "A new Hearing is created with identifier {{ param }}",
+      "updated": "A Hearing is updated with identifier {{ param }}",
+      "deleted": "A Hearing is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Hearing {{ id }}?"
+      },
+      "detail": {
+        "title": "Hearing"
+      },
+      "id": "ID",
+      "hearingDate": "Hearing Date",
+      "nextHearingDate": "Next Hearing Date",
+      "description": "Description",
+      "previousHearingDate": "Previous Hearing Date",
+      "conclusion": "Conclusion",
+      "comment": "Comment",
+      "caseStatus": "Case Status",
+      "freefield1": "Freefield 1",
+      "freefield2": "Freefield 2",
+      "freefield3": "Freefield 3",
+      "freefield4": "Freefield 4",
+      "freefield5": "Freefield 5",
+      "lastModifiedBy": "Last Modified By",
+      "lastModified": "Last Modified",
+      "courtCase": "Court Case"
+    }
+  }
+}

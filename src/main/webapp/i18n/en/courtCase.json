@@ -1,0 +1,69 @@
+{
+  "eCourtApp": {
+    "courtCase": {
+      "home": {
+        "title": "Court Cases",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Court Case",
+        "createOrEditLabel": "Create or edit a Court Case",
+        "notFound": "No Court Cases found"
+      },
+      "created": "A new Court Case is created with identifier {{ param }}",
+      "updated": "A Court Case is updated with identifier {{ param }}",
+      "deleted": "A Court Case is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Court Case {{ id }}?"
+      },
+      "detail": {
+        "title": "Court Case"
+      },
+      "id": "ID",
+      "landReferenceNo": "Land Reference No",
+      "caseNo": "Case No",
+      "villageName": "Village Name",
+      "accuserName": "Accuser Name",
+      "defendantName": "Defendant Name",
+      "accuserLawyer": "Accuser Lawyer",
+      "defendantLawyer": "Defendant Lawyer",
+      "caseOfficer": "Case Officer",
+      "caseOfficerAdd": "Case Officer Add",
+      "totalArea": "Total Area",
+      "landAcquisitionOfficerNo": "Land Acquisition Officer No",
+      "section11JudgmentNo": "Section 11 Judgment No",
+      "section4NoticeDate": "Section 4 Notice Date",
+      "judgementDate": "Judgement Date",
+      "dateOfDecision": "Date Of Decision",
+      "caseFilingDate": "Case Filing Date",
+      "caseStatus": "Case Status",
+      "lastHearingDate": "Last Hearing Date",
+      "nextHearingDate": "Next Hearing Date",
+      "natureResult": "Nature Result",
+      "amountDepositeInCourt": "Amount Deposite In Court",
+      "claimAmount": "Claim Amount",
+      "depositedChequeNo": "Deposited Cheque No",
+      "depositedchequeDate": "Depositedcheque Date",
+      "addInterestAmountDistCourt": "Add Interest Amount Dist Court",
+      "addInterestApplicationNo": "Add Interest Application No",
+      "addIntChequeNo": "Add Int Cheque No",
+      "addIntChequeDate": "Add Int Cheque Date",
+      "bankGuaranteeAppNo": "Bank Guarantee App No",
+      "courtName": "Court Name",
+      "courtType": "Court Type",
+      "isActivated": "Is Activated",
+      "freefield1": "Freefield 1",
+      "freefield2": "Freefield 2",
+      "freefield3": "Freefield 3",
+      "freefield4": "Freefield 4",
+      "freefield5": "Freefield 5",
+      "freefield6": "Freefield 6",
+      "freefield7": "Freefield 7",
+      "freefield8": "Freefield 8",
+      "freefield9": "Freefield 9",
+      "freefield10": "Freefield 10",
+      "lastModifiedBy": "Last Modified By",
+      "lastModified": "Last Modified",
+      "organization": "Organization",
+      "lawyerDetails": "Lawyer Details"
+    }
+  }
+}

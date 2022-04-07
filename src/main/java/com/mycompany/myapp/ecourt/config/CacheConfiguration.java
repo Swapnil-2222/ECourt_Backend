@@ -48,6 +48,12 @@ public class CacheConfiguration {
             createCache(cm, com.mycompany.myapp.ecourt.domain.User.class.getName());
             createCache(cm, com.mycompany.myapp.ecourt.domain.Authority.class.getName());
             createCache(cm, com.mycompany.myapp.ecourt.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.mycompany.myapp.ecourt.domain.CourtCase.class.getName());
+            createCache(cm, com.mycompany.myapp.ecourt.domain.CourtCase.class.getName() + ".lawyerDetails");
+            createCache(cm, com.mycompany.myapp.ecourt.domain.Hearing.class.getName());
+            createCache(cm, com.mycompany.myapp.ecourt.domain.LawyerDetails.class.getName());
+            createCache(cm, com.mycompany.myapp.ecourt.domain.LawyerDetails.class.getName() + ".courtCases");
+            createCache(cm, com.mycompany.myapp.ecourt.domain.Organization.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -1,0 +1,10 @@
+{
+  "eCourtApp": {
+    "CaseStatus": {
+      "null": "",
+      "CREATED": "Created",
+      "ONPROGRESS": "OnProgress",
+      "CLEARED": "Cleared"
+    }
+  }
+}
