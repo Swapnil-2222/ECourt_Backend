@@ -1,7 +1,9 @@
 package com.mycompany.myapp.ecourt.web.rest;
 
 import com.mycompany.myapp.ecourt.repository.CourtCaseRepository;
+import com.mycompany.myapp.ecourt.service.CourtCaseQueryService;
 import com.mycompany.myapp.ecourt.service.CourtCaseService;
+import com.mycompany.myapp.ecourt.service.criteria.CourtCaseCriteria;
 import com.mycompany.myapp.ecourt.service.dto.CourtCaseDTO;
 import com.mycompany.myapp.ecourt.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -15,7 +17,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -41,9 +42,16 @@ public class CourtCaseResource {
 
     private final CourtCaseRepository courtCaseRepository;
 
-    public CourtCaseResource(CourtCaseService courtCaseService, CourtCaseRepository courtCaseRepository) {
+    private final CourtCaseQueryService courtCaseQueryService;
+
+    public CourtCaseResource(
+        CourtCaseService courtCaseService,
+        CourtCaseRepository courtCaseRepository,
+        CourtCaseQueryService courtCaseQueryService
+    ) {
         this.courtCaseService = courtCaseService;
         this.courtCaseRepository = courtCaseRepository;
+        this.courtCaseQueryService = courtCaseQueryService;
     }
 
     /**
@@ -140,23 +148,30 @@ public class CourtCaseResource {
      * {@code GET  /court-cases} : get all the courtCases.
      *
      * @param pageable the pagination information.
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
+     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of courtCases in body.
      */
     @GetMapping("/court-cases")
     public ResponseEntity<List<CourtCaseDTO>> getAllCourtCases(
-        @org.springdoc.api.annotations.ParameterObject Pageable pageable,
-        @RequestParam(required = false, defaultValue = "true") boolean eagerload
+        CourtCaseCriteria criteria,
+        @org.springdoc.api.annotations.ParameterObject Pageable pageable
     ) {
-        log.debug("REST request to get a page of CourtCases");
-        Page<CourtCaseDTO> page;
-        if (eagerload) {
-            page = courtCaseService.findAllWithEagerRelationships(pageable);
-        } else {
-            page = courtCaseService.findAll(pageable);
-        }
+        log.debug("REST request to get CourtCases by criteria: {}", criteria);
+        Page<CourtCaseDTO> page = courtCaseQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * {@code GET  /court-cases/count} : count all the courtCases.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+     */
+    @GetMapping("/court-cases/count")
+    public ResponseEntity<Long> countCourtCases(CourtCaseCriteria criteria) {
+        log.debug("REST request to count CourtCases by criteria: {}", criteria);
+        return ResponseEntity.ok().body(courtCaseQueryService.countByCriteria(criteria));
     }
 
     /**

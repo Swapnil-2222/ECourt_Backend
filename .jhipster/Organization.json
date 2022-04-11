@@ -55,7 +55,7 @@
     }
   ],
   "fluentMethods": true,
-  "jpaMetamodelFiltering": false,
+  "jpaMetamodelFiltering": true,
   "name": "Organization",
   "pagination": "pagination",
   "readOnly": false,

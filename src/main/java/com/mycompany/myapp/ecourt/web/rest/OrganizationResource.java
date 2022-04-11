@@ -1,7 +1,9 @@
 package com.mycompany.myapp.ecourt.web.rest;
 
 import com.mycompany.myapp.ecourt.repository.OrganizationRepository;
+import com.mycompany.myapp.ecourt.service.OrganizationQueryService;
 import com.mycompany.myapp.ecourt.service.OrganizationService;
+import com.mycompany.myapp.ecourt.service.criteria.OrganizationCriteria;
 import com.mycompany.myapp.ecourt.service.dto.OrganizationDTO;
 import com.mycompany.myapp.ecourt.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -15,7 +17,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -41,9 +42,16 @@ public class OrganizationResource {
 
     private final OrganizationRepository organizationRepository;
 
-    public OrganizationResource(OrganizationService organizationService, OrganizationRepository organizationRepository) {
+    private final OrganizationQueryService organizationQueryService;
+
+    public OrganizationResource(
+        OrganizationService organizationService,
+        OrganizationRepository organizationRepository,
+        OrganizationQueryService organizationQueryService
+    ) {
         this.organizationService = organizationService;
         this.organizationRepository = organizationRepository;
+        this.organizationQueryService = organizationQueryService;
     }
 
     /**
@@ -140,14 +148,30 @@ public class OrganizationResource {
      * {@code GET  /organizations} : get all the organizations.
      *
      * @param pageable the pagination information.
+     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of organizations in body.
      */
     @GetMapping("/organizations")
-    public ResponseEntity<List<OrganizationDTO>> getAllOrganizations(@org.springdoc.api.annotations.ParameterObject Pageable pageable) {
-        log.debug("REST request to get a page of Organizations");
-        Page<OrganizationDTO> page = organizationService.findAll(pageable);
+    public ResponseEntity<List<OrganizationDTO>> getAllOrganizations(
+        OrganizationCriteria criteria,
+        @org.springdoc.api.annotations.ParameterObject Pageable pageable
+    ) {
+        log.debug("REST request to get Organizations by criteria: {}", criteria);
+        Page<OrganizationDTO> page = organizationQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * {@code GET  /organizations/count} : count all the organizations.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+     */
+    @GetMapping("/organizations/count")
+    public ResponseEntity<Long> countOrganizations(OrganizationCriteria criteria) {
+        log.debug("REST request to count Organizations by criteria: {}", criteria);
+        return ResponseEntity.ok().body(organizationQueryService.countByCriteria(criteria));
     }
 
     /**

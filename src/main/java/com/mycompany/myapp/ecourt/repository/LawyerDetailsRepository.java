@@ -13,7 +13,8 @@ import org.springframework.stereotype.Repository;
  * Spring Data SQL repository for the LawyerDetails entity.
  */
 @Repository
-public interface LawyerDetailsRepository extends LawyerDetailsRepositoryWithBagRelationships, JpaRepository<LawyerDetails, Long> {
+public interface LawyerDetailsRepository
+    extends LawyerDetailsRepositoryWithBagRelationships, JpaRepository<LawyerDetails, Long>, JpaSpecificationExecutor<LawyerDetails> {
     default Optional<LawyerDetails> findOneWithEagerRelationships(Long id) {
         return this.fetchBagRelationships(this.findById(id));
     }
