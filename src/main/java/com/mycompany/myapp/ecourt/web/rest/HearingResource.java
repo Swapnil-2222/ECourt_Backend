@@ -1,7 +1,9 @@
 package com.mycompany.myapp.ecourt.web.rest;
 
 import com.mycompany.myapp.ecourt.repository.HearingRepository;
+import com.mycompany.myapp.ecourt.service.HearingQueryService;
 import com.mycompany.myapp.ecourt.service.HearingService;
+import com.mycompany.myapp.ecourt.service.criteria.HearingCriteria;
 import com.mycompany.myapp.ecourt.service.dto.HearingDTO;
 import com.mycompany.myapp.ecourt.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -15,7 +17,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -41,9 +42,12 @@ public class HearingResource {
 
     private final HearingRepository hearingRepository;
 
-    public HearingResource(HearingService hearingService, HearingRepository hearingRepository) {
+    private final HearingQueryService hearingQueryService;
+
+    public HearingResource(HearingService hearingService, HearingRepository hearingRepository, HearingQueryService hearingQueryService) {
         this.hearingService = hearingService;
         this.hearingRepository = hearingRepository;
+        this.hearingQueryService = hearingQueryService;
     }
 
     /**
@@ -140,23 +144,30 @@ public class HearingResource {
      * {@code GET  /hearings} : get all the hearings.
      *
      * @param pageable the pagination information.
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
+     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of hearings in body.
      */
     @GetMapping("/hearings")
     public ResponseEntity<List<HearingDTO>> getAllHearings(
-        @org.springdoc.api.annotations.ParameterObject Pageable pageable,
-        @RequestParam(required = false, defaultValue = "true") boolean eagerload
+        HearingCriteria criteria,
+        @org.springdoc.api.annotations.ParameterObject Pageable pageable
     ) {
-        log.debug("REST request to get a page of Hearings");
-        Page<HearingDTO> page;
-        if (eagerload) {
-            page = hearingService.findAllWithEagerRelationships(pageable);
-        } else {
-            page = hearingService.findAll(pageable);
-        }
+        log.debug("REST request to get Hearings by criteria: {}", criteria);
+        Page<HearingDTO> page = hearingQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * {@code GET  /hearings/count} : count all the hearings.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+     */
+    @GetMapping("/hearings/count")
+    public ResponseEntity<Long> countHearings(HearingCriteria criteria) {
+        log.debug("REST request to count Hearings by criteria: {}", criteria);
+        return ResponseEntity.ok().body(hearingQueryService.countByCriteria(criteria));
     }
 
     /**

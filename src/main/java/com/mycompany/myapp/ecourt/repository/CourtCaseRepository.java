@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
  * Spring Data SQL repository for the CourtCase entity.
  */
 @Repository
-public interface CourtCaseRepository extends JpaRepository<CourtCase, Long> {
+public interface CourtCaseRepository extends JpaRepository<CourtCase, Long>, JpaSpecificationExecutor<CourtCase> {
     default Optional<CourtCase> findOneWithEagerRelationships(Long id) {
         return this.findOneWithToOneRelationships(id);
     }

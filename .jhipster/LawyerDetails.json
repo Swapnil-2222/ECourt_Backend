@@ -61,7 +61,7 @@
     }
   ],
   "fluentMethods": true,
-  "jpaMetamodelFiltering": false,
+  "jpaMetamodelFiltering": true,
   "name": "LawyerDetails",
   "pagination": "pagination",
   "readOnly": false,

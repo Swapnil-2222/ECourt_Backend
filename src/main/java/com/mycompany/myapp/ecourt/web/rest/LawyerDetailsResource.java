@@ -1,7 +1,9 @@
 package com.mycompany.myapp.ecourt.web.rest;
 
 import com.mycompany.myapp.ecourt.repository.LawyerDetailsRepository;
+import com.mycompany.myapp.ecourt.service.LawyerDetailsQueryService;
 import com.mycompany.myapp.ecourt.service.LawyerDetailsService;
+import com.mycompany.myapp.ecourt.service.criteria.LawyerDetailsCriteria;
 import com.mycompany.myapp.ecourt.service.dto.LawyerDetailsDTO;
 import com.mycompany.myapp.ecourt.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
@@ -15,7 +17,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -41,9 +42,16 @@ public class LawyerDetailsResource {
 
     private final LawyerDetailsRepository lawyerDetailsRepository;
 
-    public LawyerDetailsResource(LawyerDetailsService lawyerDetailsService, LawyerDetailsRepository lawyerDetailsRepository) {
+    private final LawyerDetailsQueryService lawyerDetailsQueryService;
+
+    public LawyerDetailsResource(
+        LawyerDetailsService lawyerDetailsService,
+        LawyerDetailsRepository lawyerDetailsRepository,
+        LawyerDetailsQueryService lawyerDetailsQueryService
+    ) {
         this.lawyerDetailsService = lawyerDetailsService;
         this.lawyerDetailsRepository = lawyerDetailsRepository;
+        this.lawyerDetailsQueryService = lawyerDetailsQueryService;
     }
 
     /**
@@ -140,23 +148,30 @@ public class LawyerDetailsResource {
      * {@code GET  /lawyer-details} : get all the lawyerDetails.
      *
      * @param pageable the pagination information.
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
+     * @param criteria the criteria which the requested entities should match.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of lawyerDetails in body.
      */
     @GetMapping("/lawyer-details")
     public ResponseEntity<List<LawyerDetailsDTO>> getAllLawyerDetails(
-        @org.springdoc.api.annotations.ParameterObject Pageable pageable,
-        @RequestParam(required = false, defaultValue = "true") boolean eagerload
+        LawyerDetailsCriteria criteria,
+        @org.springdoc.api.annotations.ParameterObject Pageable pageable
     ) {
-        log.debug("REST request to get a page of LawyerDetails");
-        Page<LawyerDetailsDTO> page;
-        if (eagerload) {
-            page = lawyerDetailsService.findAllWithEagerRelationships(pageable);
-        } else {
-            page = lawyerDetailsService.findAll(pageable);
-        }
+        log.debug("REST request to get LawyerDetails by criteria: {}", criteria);
+        Page<LawyerDetailsDTO> page = lawyerDetailsQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    /**
+     * {@code GET  /lawyer-details/count} : count all the lawyerDetails.
+     *
+     * @param criteria the criteria which the requested entities should match.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
+     */
+    @GetMapping("/lawyer-details/count")
+    public ResponseEntity<Long> countLawyerDetails(LawyerDetailsCriteria criteria) {
+        log.debug("REST request to count LawyerDetails by criteria: {}", criteria);
+        return ResponseEntity.ok().body(lawyerDetailsQueryService.countByCriteria(criteria));
     }
 
     /**

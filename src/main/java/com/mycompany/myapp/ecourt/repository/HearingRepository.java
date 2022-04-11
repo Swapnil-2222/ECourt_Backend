@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
  * Spring Data SQL repository for the Hearing entity.
  */
 @Repository
-public interface HearingRepository extends JpaRepository<Hearing, Long> {
+public interface HearingRepository extends JpaRepository<Hearing, Long>, JpaSpecificationExecutor<Hearing> {
     default Optional<Hearing> findOneWithEagerRelationships(Long id) {
         return this.findOneWithToOneRelationships(id);
     }

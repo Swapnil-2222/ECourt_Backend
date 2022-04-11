@@ -64,7 +64,7 @@
     }
   ],
   "fluentMethods": true,
-  "jpaMetamodelFiltering": false,
+  "jpaMetamodelFiltering": true,
   "name": "Hearing",
   "pagination": "pagination",
   "readOnly": false,
