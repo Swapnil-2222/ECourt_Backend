@@ -109,6 +109,7 @@ enum CaseType{
     DARKHAST(Darkhast)
     FIRSTAPPEAL(FirstAppeal)
     CIVILMA(CivilMA)
+    OTHERS(Others)
 }
 
 enum CourtType{
