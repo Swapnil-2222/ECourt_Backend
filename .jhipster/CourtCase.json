@@ -133,6 +133,11 @@
       "fieldValues": "DISTRICTCOURT (DistrictCourt),HIGHCOURT (HighCourt),OTHERS (Others)"
     },
     {
+      "fieldName": "caseType",
+      "fieldType": "CaseType",
+      "fieldValues": "LARSEC18 (LarSec18),DARKHAST (Darkhast),FIRSTAPPEAL (FirstAppeal),CIVILMA (CivilMA)"
+    },
+    {
       "fieldName": "isActivated",
       "fieldType": "Boolean"
     },

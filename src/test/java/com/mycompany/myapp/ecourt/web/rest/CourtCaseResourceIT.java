@@ -11,6 +11,7 @@ import com.mycompany.myapp.ecourt.domain.CourtCase;
 import com.mycompany.myapp.ecourt.domain.LawyerDetails;
 import com.mycompany.myapp.ecourt.domain.Organization;
 import com.mycompany.myapp.ecourt.domain.enumeration.CaseStatus;
+import com.mycompany.myapp.ecourt.domain.enumeration.CaseType;
 import com.mycompany.myapp.ecourt.domain.enumeration.CourtType;
 import com.mycompany.myapp.ecourt.domain.enumeration.NatureResult;
 import com.mycompany.myapp.ecourt.repository.CourtCaseRepository;
@@ -139,6 +140,9 @@ class CourtCaseResourceIT {
     private static final CourtType DEFAULT_COURT_TYPE = CourtType.DISTRICTCOURT;
     private static final CourtType UPDATED_COURT_TYPE = CourtType.HIGHCOURT;
 
+    private static final CaseType DEFAULT_CASE_TYPE = CaseType.LARSEC18;
+    private static final CaseType UPDATED_CASE_TYPE = CaseType.DARKHAST;
+
     private static final Boolean DEFAULT_IS_ACTIVATED = false;
     private static final Boolean UPDATED_IS_ACTIVATED = true;
 
@@ -243,6 +247,7 @@ class CourtCaseResourceIT {
             .bankGuaranteeAppNo(DEFAULT_BANK_GUARANTEE_APP_NO)
             .courtName(DEFAULT_COURT_NAME)
             .courtType(DEFAULT_COURT_TYPE)
+            .caseType(DEFAULT_CASE_TYPE)
             .isActivated(DEFAULT_IS_ACTIVATED)
             .freefield1(DEFAULT_FREEFIELD_1)
             .freefield2(DEFAULT_FREEFIELD_2)
@@ -298,6 +303,7 @@ class CourtCaseResourceIT {
             .bankGuaranteeAppNo(UPDATED_BANK_GUARANTEE_APP_NO)
             .courtName(UPDATED_COURT_NAME)
             .courtType(UPDATED_COURT_TYPE)
+            .caseType(UPDATED_CASE_TYPE)
             .isActivated(UPDATED_IS_ACTIVATED)
             .freefield1(UPDATED_FREEFIELD_1)
             .freefield2(UPDATED_FREEFIELD_2)
@@ -364,6 +370,7 @@ class CourtCaseResourceIT {
         assertThat(testCourtCase.getBankGuaranteeAppNo()).isEqualTo(DEFAULT_BANK_GUARANTEE_APP_NO);
         assertThat(testCourtCase.getCourtName()).isEqualTo(DEFAULT_COURT_NAME);
         assertThat(testCourtCase.getCourtType()).isEqualTo(DEFAULT_COURT_TYPE);
+        assertThat(testCourtCase.getCaseType()).isEqualTo(DEFAULT_CASE_TYPE);
         assertThat(testCourtCase.getIsActivated()).isEqualTo(DEFAULT_IS_ACTIVATED);
         assertThat(testCourtCase.getFreefield1()).isEqualTo(DEFAULT_FREEFIELD_1);
         assertThat(testCourtCase.getFreefield2()).isEqualTo(DEFAULT_FREEFIELD_2);
@@ -441,6 +448,7 @@ class CourtCaseResourceIT {
             .andExpect(jsonPath("$.[*].bankGuaranteeAppNo").value(hasItem(DEFAULT_BANK_GUARANTEE_APP_NO)))
             .andExpect(jsonPath("$.[*].courtName").value(hasItem(DEFAULT_COURT_NAME)))
             .andExpect(jsonPath("$.[*].courtType").value(hasItem(DEFAULT_COURT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].caseType").value(hasItem(DEFAULT_CASE_TYPE.toString())))
             .andExpect(jsonPath("$.[*].isActivated").value(hasItem(DEFAULT_IS_ACTIVATED.booleanValue())))
             .andExpect(jsonPath("$.[*].freefield1").value(hasItem(DEFAULT_FREEFIELD_1)))
             .andExpect(jsonPath("$.[*].freefield2").value(hasItem(DEFAULT_FREEFIELD_2)))
@@ -517,6 +525,7 @@ class CourtCaseResourceIT {
             .andExpect(jsonPath("$.bankGuaranteeAppNo").value(DEFAULT_BANK_GUARANTEE_APP_NO))
             .andExpect(jsonPath("$.courtName").value(DEFAULT_COURT_NAME))
             .andExpect(jsonPath("$.courtType").value(DEFAULT_COURT_TYPE.toString()))
+            .andExpect(jsonPath("$.caseType").value(DEFAULT_CASE_TYPE.toString()))
             .andExpect(jsonPath("$.isActivated").value(DEFAULT_IS_ACTIVATED.booleanValue()))
             .andExpect(jsonPath("$.freefield1").value(DEFAULT_FREEFIELD_1))
             .andExpect(jsonPath("$.freefield2").value(DEFAULT_FREEFIELD_2))
@@ -2900,6 +2909,58 @@ class CourtCaseResourceIT {
 
     @Test
     @Transactional
+    void getAllCourtCasesByCaseTypeIsEqualToSomething() throws Exception {
+        // Initialize the database
+        courtCaseRepository.saveAndFlush(courtCase);
+
+        // Get all the courtCaseList where caseType equals to DEFAULT_CASE_TYPE
+        defaultCourtCaseShouldBeFound("caseType.equals=" + DEFAULT_CASE_TYPE);
+
+        // Get all the courtCaseList where caseType equals to UPDATED_CASE_TYPE
+        defaultCourtCaseShouldNotBeFound("caseType.equals=" + UPDATED_CASE_TYPE);
+    }
+
+    @Test
+    @Transactional
+    void getAllCourtCasesByCaseTypeIsNotEqualToSomething() throws Exception {
+        // Initialize the database
+        courtCaseRepository.saveAndFlush(courtCase);
+
+        // Get all the courtCaseList where caseType not equals to DEFAULT_CASE_TYPE
+        defaultCourtCaseShouldNotBeFound("caseType.notEquals=" + DEFAULT_CASE_TYPE);
+
+        // Get all the courtCaseList where caseType not equals to UPDATED_CASE_TYPE
+        defaultCourtCaseShouldBeFound("caseType.notEquals=" + UPDATED_CASE_TYPE);
+    }
+
+    @Test
+    @Transactional
+    void getAllCourtCasesByCaseTypeIsInShouldWork() throws Exception {
+        // Initialize the database
+        courtCaseRepository.saveAndFlush(courtCase);
+
+        // Get all the courtCaseList where caseType in DEFAULT_CASE_TYPE or UPDATED_CASE_TYPE
+        defaultCourtCaseShouldBeFound("caseType.in=" + DEFAULT_CASE_TYPE + "," + UPDATED_CASE_TYPE);
+
+        // Get all the courtCaseList where caseType equals to UPDATED_CASE_TYPE
+        defaultCourtCaseShouldNotBeFound("caseType.in=" + UPDATED_CASE_TYPE);
+    }
+
+    @Test
+    @Transactional
+    void getAllCourtCasesByCaseTypeIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        courtCaseRepository.saveAndFlush(courtCase);
+
+        // Get all the courtCaseList where caseType is not null
+        defaultCourtCaseShouldBeFound("caseType.specified=true");
+
+        // Get all the courtCaseList where caseType is null
+        defaultCourtCaseShouldNotBeFound("caseType.specified=false");
+    }
+
+    @Test
+    @Transactional
     void getAllCourtCasesByIsActivatedIsEqualToSomething() throws Exception {
         // Initialize the database
         courtCaseRepository.saveAndFlush(courtCase);
@@ -3978,6 +4039,7 @@ class CourtCaseResourceIT {
             .andExpect(jsonPath("$.[*].bankGuaranteeAppNo").value(hasItem(DEFAULT_BANK_GUARANTEE_APP_NO)))
             .andExpect(jsonPath("$.[*].courtName").value(hasItem(DEFAULT_COURT_NAME)))
             .andExpect(jsonPath("$.[*].courtType").value(hasItem(DEFAULT_COURT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].caseType").value(hasItem(DEFAULT_CASE_TYPE.toString())))
             .andExpect(jsonPath("$.[*].isActivated").value(hasItem(DEFAULT_IS_ACTIVATED.booleanValue())))
             .andExpect(jsonPath("$.[*].freefield1").value(hasItem(DEFAULT_FREEFIELD_1)))
             .andExpect(jsonPath("$.[*].freefield2").value(hasItem(DEFAULT_FREEFIELD_2)))
@@ -4070,6 +4132,7 @@ class CourtCaseResourceIT {
             .bankGuaranteeAppNo(UPDATED_BANK_GUARANTEE_APP_NO)
             .courtName(UPDATED_COURT_NAME)
             .courtType(UPDATED_COURT_TYPE)
+            .caseType(UPDATED_CASE_TYPE)
             .isActivated(UPDATED_IS_ACTIVATED)
             .freefield1(UPDATED_FREEFIELD_1)
             .freefield2(UPDATED_FREEFIELD_2)
@@ -4128,6 +4191,7 @@ class CourtCaseResourceIT {
         assertThat(testCourtCase.getBankGuaranteeAppNo()).isEqualTo(UPDATED_BANK_GUARANTEE_APP_NO);
         assertThat(testCourtCase.getCourtName()).isEqualTo(UPDATED_COURT_NAME);
         assertThat(testCourtCase.getCourtType()).isEqualTo(UPDATED_COURT_TYPE);
+        assertThat(testCourtCase.getCaseType()).isEqualTo(UPDATED_CASE_TYPE);
         assertThat(testCourtCase.getIsActivated()).isEqualTo(UPDATED_IS_ACTIVATED);
         assertThat(testCourtCase.getFreefield1()).isEqualTo(UPDATED_FREEFIELD_1);
         assertThat(testCourtCase.getFreefield2()).isEqualTo(UPDATED_FREEFIELD_2);
@@ -4235,13 +4299,13 @@ class CourtCaseResourceIT {
             .addIntChequeNo(UPDATED_ADD_INT_CHEQUE_NO)
             .addIntChequeDate(UPDATED_ADD_INT_CHEQUE_DATE)
             .courtName(UPDATED_COURT_NAME)
-            .isActivated(UPDATED_IS_ACTIVATED)
-            .freefield2(UPDATED_FREEFIELD_2)
+            .caseType(UPDATED_CASE_TYPE)
+            .freefield1(UPDATED_FREEFIELD_1)
+            .freefield3(UPDATED_FREEFIELD_3)
             .freefield4(UPDATED_FREEFIELD_4)
             .freefield5(UPDATED_FREEFIELD_5)
-            .freefield6(UPDATED_FREEFIELD_6)
-            .freefield8(UPDATED_FREEFIELD_8)
-            .freefield9(UPDATED_FREEFIELD_9);
+            .freefield7(UPDATED_FREEFIELD_7)
+            .freefield8(UPDATED_FREEFIELD_8);
 
         restCourtCaseMockMvc
             .perform(
@@ -4286,16 +4350,17 @@ class CourtCaseResourceIT {
         assertThat(testCourtCase.getBankGuaranteeAppNo()).isEqualTo(DEFAULT_BANK_GUARANTEE_APP_NO);
         assertThat(testCourtCase.getCourtName()).isEqualTo(UPDATED_COURT_NAME);
         assertThat(testCourtCase.getCourtType()).isEqualTo(DEFAULT_COURT_TYPE);
-        assertThat(testCourtCase.getIsActivated()).isEqualTo(UPDATED_IS_ACTIVATED);
-        assertThat(testCourtCase.getFreefield1()).isEqualTo(DEFAULT_FREEFIELD_1);
-        assertThat(testCourtCase.getFreefield2()).isEqualTo(UPDATED_FREEFIELD_2);
-        assertThat(testCourtCase.getFreefield3()).isEqualTo(DEFAULT_FREEFIELD_3);
+        assertThat(testCourtCase.getCaseType()).isEqualTo(UPDATED_CASE_TYPE);
+        assertThat(testCourtCase.getIsActivated()).isEqualTo(DEFAULT_IS_ACTIVATED);
+        assertThat(testCourtCase.getFreefield1()).isEqualTo(UPDATED_FREEFIELD_1);
+        assertThat(testCourtCase.getFreefield2()).isEqualTo(DEFAULT_FREEFIELD_2);
+        assertThat(testCourtCase.getFreefield3()).isEqualTo(UPDATED_FREEFIELD_3);
         assertThat(testCourtCase.getFreefield4()).isEqualTo(UPDATED_FREEFIELD_4);
         assertThat(testCourtCase.getFreefield5()).isEqualTo(UPDATED_FREEFIELD_5);
-        assertThat(testCourtCase.getFreefield6()).isEqualTo(UPDATED_FREEFIELD_6);
-        assertThat(testCourtCase.getFreefield7()).isEqualTo(DEFAULT_FREEFIELD_7);
+        assertThat(testCourtCase.getFreefield6()).isEqualTo(DEFAULT_FREEFIELD_6);
+        assertThat(testCourtCase.getFreefield7()).isEqualTo(UPDATED_FREEFIELD_7);
         assertThat(testCourtCase.getFreefield8()).isEqualTo(UPDATED_FREEFIELD_8);
-        assertThat(testCourtCase.getFreefield9()).isEqualTo(UPDATED_FREEFIELD_9);
+        assertThat(testCourtCase.getFreefield9()).isEqualTo(DEFAULT_FREEFIELD_9);
         assertThat(testCourtCase.getFreefield10()).isEqualTo(DEFAULT_FREEFIELD_10);
         assertThat(testCourtCase.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
         assertThat(testCourtCase.getLastModified()).isEqualTo(DEFAULT_LAST_MODIFIED);
@@ -4345,6 +4410,7 @@ class CourtCaseResourceIT {
             .bankGuaranteeAppNo(UPDATED_BANK_GUARANTEE_APP_NO)
             .courtName(UPDATED_COURT_NAME)
             .courtType(UPDATED_COURT_TYPE)
+            .caseType(UPDATED_CASE_TYPE)
             .isActivated(UPDATED_IS_ACTIVATED)
             .freefield1(UPDATED_FREEFIELD_1)
             .freefield2(UPDATED_FREEFIELD_2)
@@ -4402,6 +4468,7 @@ class CourtCaseResourceIT {
         assertThat(testCourtCase.getBankGuaranteeAppNo()).isEqualTo(UPDATED_BANK_GUARANTEE_APP_NO);
         assertThat(testCourtCase.getCourtName()).isEqualTo(UPDATED_COURT_NAME);
         assertThat(testCourtCase.getCourtType()).isEqualTo(UPDATED_COURT_TYPE);
+        assertThat(testCourtCase.getCaseType()).isEqualTo(UPDATED_CASE_TYPE);
         assertThat(testCourtCase.getIsActivated()).isEqualTo(UPDATED_IS_ACTIVATED);
         assertThat(testCourtCase.getFreefield1()).isEqualTo(UPDATED_FREEFIELD_1);
         assertThat(testCourtCase.getFreefield2()).isEqualTo(UPDATED_FREEFIELD_2);

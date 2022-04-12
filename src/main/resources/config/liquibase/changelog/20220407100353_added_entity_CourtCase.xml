@@ -107,6 +107,9 @@
             <column name="court_type" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="case_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="is_activated" type="boolean">
                 <constraints nullable="true" />
             </column>
@@ -201,6 +204,7 @@
             <column name="bank_guarantee_app_no" type="string"/>
             <column name="court_name" type="string"/>
             <column name="court_type" type="string"/>
+            <column name="case_type" type="string"/>
             <column name="is_activated" type="boolean"/>
             <column name="freefield_1" type="string"/>
             <column name="freefield_2" type="string"/>

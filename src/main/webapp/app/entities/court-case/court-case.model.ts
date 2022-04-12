@@ -3,6 +3,7 @@ import { ILawyerDetails } from 'app/entities/lawyer-details/lawyer-details.model
 import { CaseStatus } from 'app/entities/enumerations/case-status.model';
 import { NatureResult } from 'app/entities/enumerations/nature-result.model';
 import { CourtType } from 'app/entities/enumerations/court-type.model';
+import { CaseType } from 'app/entities/enumerations/case-type.model';
 
 export interface ICourtCase {
   id?: number;
@@ -37,6 +38,7 @@ export interface ICourtCase {
   bankGuaranteeAppNo?: string | null;
   courtName?: string | null;
   courtType?: CourtType | null;
+  caseType?: CaseType | null;
   isActivated?: boolean | null;
   freefield1?: string | null;
   freefield2?: string | null;
@@ -88,6 +90,7 @@ export class CourtCase implements ICourtCase {
     public bankGuaranteeAppNo?: string | null,
     public courtName?: string | null,
     public courtType?: CourtType | null,
+    public caseType?: CaseType | null,
     public isActivated?: boolean | null,
     public freefield1?: string | null,
     public freefield2?: string | null,

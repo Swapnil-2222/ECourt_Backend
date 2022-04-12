@@ -197,6 +197,9 @@ public class CourtCaseQueryService extends QueryService<CourtCase> {
             if (criteria.getCourtType() != null) {
                 specification = specification.and(buildSpecification(criteria.getCourtType(), CourtCase_.courtType));
             }
+            if (criteria.getCaseType() != null) {
+                specification = specification.and(buildSpecification(criteria.getCaseType(), CourtCase_.caseType));
+            }
             if (criteria.getIsActivated() != null) {
                 specification = specification.and(buildSpecification(criteria.getIsActivated(), CourtCase_.isActivated));
             }
