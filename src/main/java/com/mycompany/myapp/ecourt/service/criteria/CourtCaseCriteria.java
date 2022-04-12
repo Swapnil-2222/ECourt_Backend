@@ -1,6 +1,7 @@
 package com.mycompany.myapp.ecourt.service.criteria;
 
 import com.mycompany.myapp.ecourt.domain.enumeration.CaseStatus;
+import com.mycompany.myapp.ecourt.domain.enumeration.CaseType;
 import com.mycompany.myapp.ecourt.domain.enumeration.CourtType;
 import com.mycompany.myapp.ecourt.domain.enumeration.NatureResult;
 import java.io.Serializable;
@@ -78,6 +79,23 @@ public class CourtCaseCriteria implements Serializable, Criteria {
         }
     }
 
+    /**
+     * Class for filtering CaseType
+     */
+    public static class CaseTypeFilter extends Filter<CaseType> {
+
+        public CaseTypeFilter() {}
+
+        public CaseTypeFilter(CaseTypeFilter filter) {
+            super(filter);
+        }
+
+        @Override
+        public CaseTypeFilter copy() {
+            return new CaseTypeFilter(this);
+        }
+    }
+
     private static final long serialVersionUID = 1L;
 
     private LongFilter id;
@@ -143,6 +161,8 @@ public class CourtCaseCriteria implements Serializable, Criteria {
     private StringFilter courtName;
 
     private CourtTypeFilter courtType;
+
+    private CaseTypeFilter caseType;
 
     private BooleanFilter isActivated;
 
@@ -211,6 +231,7 @@ public class CourtCaseCriteria implements Serializable, Criteria {
         this.bankGuaranteeAppNo = other.bankGuaranteeAppNo == null ? null : other.bankGuaranteeAppNo.copy();
         this.courtName = other.courtName == null ? null : other.courtName.copy();
         this.courtType = other.courtType == null ? null : other.courtType.copy();
+        this.caseType = other.caseType == null ? null : other.caseType.copy();
         this.isActivated = other.isActivated == null ? null : other.isActivated.copy();
         this.freefield1 = other.freefield1 == null ? null : other.freefield1.copy();
         this.freefield2 = other.freefield2 == null ? null : other.freefield2.copy();
@@ -714,6 +735,21 @@ public class CourtCaseCriteria implements Serializable, Criteria {
         this.courtType = courtType;
     }
 
+    public CaseTypeFilter getCaseType() {
+        return caseType;
+    }
+
+    public CaseTypeFilter caseType() {
+        if (caseType == null) {
+            caseType = new CaseTypeFilter();
+        }
+        return caseType;
+    }
+
+    public void setCaseType(CaseTypeFilter caseType) {
+        this.caseType = caseType;
+    }
+
     public BooleanFilter getIsActivated() {
         return isActivated;
     }
@@ -989,6 +1025,7 @@ public class CourtCaseCriteria implements Serializable, Criteria {
             Objects.equals(bankGuaranteeAppNo, that.bankGuaranteeAppNo) &&
             Objects.equals(courtName, that.courtName) &&
             Objects.equals(courtType, that.courtType) &&
+            Objects.equals(caseType, that.caseType) &&
             Objects.equals(isActivated, that.isActivated) &&
             Objects.equals(freefield1, that.freefield1) &&
             Objects.equals(freefield2, that.freefield2) &&
@@ -1043,6 +1080,7 @@ public class CourtCaseCriteria implements Serializable, Criteria {
             bankGuaranteeAppNo,
             courtName,
             courtType,
+            caseType,
             isActivated,
             freefield1,
             freefield2,
@@ -1098,6 +1136,7 @@ public class CourtCaseCriteria implements Serializable, Criteria {
             (bankGuaranteeAppNo != null ? "bankGuaranteeAppNo=" + bankGuaranteeAppNo + ", " : "") +
             (courtName != null ? "courtName=" + courtName + ", " : "") +
             (courtType != null ? "courtType=" + courtType + ", " : "") +
+            (caseType != null ? "caseType=" + caseType + ", " : "") +
             (isActivated != null ? "isActivated=" + isActivated + ", " : "") +
             (freefield1 != null ? "freefield1=" + freefield1 + ", " : "") +
             (freefield2 != null ? "freefield2=" + freefield2 + ", " : "") +

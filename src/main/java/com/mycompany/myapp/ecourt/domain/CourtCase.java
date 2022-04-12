@@ -2,6 +2,7 @@ package com.mycompany.myapp.ecourt.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.mycompany.myapp.ecourt.domain.enumeration.CaseStatus;
+import com.mycompany.myapp.ecourt.domain.enumeration.CaseType;
 import com.mycompany.myapp.ecourt.domain.enumeration.CourtType;
 import com.mycompany.myapp.ecourt.domain.enumeration.NatureResult;
 import java.io.Serializable;
@@ -121,6 +122,10 @@ public class CourtCase implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "court_type")
     private CourtType courtType;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "case_type")
+    private CaseType caseType;
 
     @Column(name = "is_activated")
     private Boolean isActivated;
@@ -587,6 +592,19 @@ public class CourtCase implements Serializable {
         this.courtType = courtType;
     }
 
+    public CaseType getCaseType() {
+        return this.caseType;
+    }
+
+    public CourtCase caseType(CaseType caseType) {
+        this.setCaseType(caseType);
+        return this;
+    }
+
+    public void setCaseType(CaseType caseType) {
+        this.caseType = caseType;
+    }
+
     public Boolean getIsActivated() {
         return this.isActivated;
     }
@@ -855,6 +873,7 @@ public class CourtCase implements Serializable {
             ", bankGuaranteeAppNo='" + getBankGuaranteeAppNo() + "'" +
             ", courtName='" + getCourtName() + "'" +
             ", courtType='" + getCourtType() + "'" +
+            ", caseType='" + getCaseType() + "'" +
             ", isActivated='" + getIsActivated() + "'" +
             ", freefield1='" + getFreefield1() + "'" +
             ", freefield2='" + getFreefield2() + "'" +

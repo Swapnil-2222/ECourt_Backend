@@ -12,6 +12,7 @@ import { OrganizationService } from 'app/entities/organization/service/organizat
 import { CaseStatus } from 'app/entities/enumerations/case-status.model';
 import { NatureResult } from 'app/entities/enumerations/nature-result.model';
 import { CourtType } from 'app/entities/enumerations/court-type.model';
+import { CaseType } from 'app/entities/enumerations/case-type.model';
 
 @Component({
   selector: 'jhi-court-case-update',
@@ -22,6 +23,7 @@ export class CourtCaseUpdateComponent implements OnInit {
   caseStatusValues = Object.keys(CaseStatus);
   natureResultValues = Object.keys(NatureResult);
   courtTypeValues = Object.keys(CourtType);
+  caseTypeValues = Object.keys(CaseType);
 
   organizationsSharedCollection: IOrganization[] = [];
 
@@ -58,6 +60,7 @@ export class CourtCaseUpdateComponent implements OnInit {
     bankGuaranteeAppNo: [],
     courtName: [],
     courtType: [],
+    caseType: [],
     isActivated: [],
     freefield1: [],
     freefield2: [],
@@ -160,6 +163,7 @@ export class CourtCaseUpdateComponent implements OnInit {
       bankGuaranteeAppNo: courtCase.bankGuaranteeAppNo,
       courtName: courtCase.courtName,
       courtType: courtCase.courtType,
+      caseType: courtCase.caseType,
       isActivated: courtCase.isActivated,
       freefield1: courtCase.freefield1,
       freefield2: courtCase.freefield2,
@@ -229,6 +233,7 @@ export class CourtCaseUpdateComponent implements OnInit {
       bankGuaranteeAppNo: this.editForm.get(['bankGuaranteeAppNo'])!.value,
       courtName: this.editForm.get(['courtName'])!.value,
       courtType: this.editForm.get(['courtType'])!.value,
+      caseType: this.editForm.get(['caseType'])!.value,
       isActivated: this.editForm.get(['isActivated'])!.value,
       freefield1: this.editForm.get(['freefield1'])!.value,
       freefield2: this.editForm.get(['freefield2'])!.value,

@@ -129,6 +129,9 @@
           <th scope="col" jhiSortBy="courtType">
             <span jhiTranslate="eCourtApp.courtCase.courtType">Court Type</span> <fa-icon icon="sort"></fa-icon>
           </th>
+          <th scope="col" jhiSortBy="caseType">
+            <span jhiTranslate="eCourtApp.courtCase.caseType">Case Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col" jhiSortBy="isActivated">
             <span jhiTranslate="eCourtApp.courtCase.isActivated">Is Activated</span> <fa-icon icon="sort"></fa-icon>
           </th>
@@ -210,6 +213,7 @@
           <td>{{ courtCase.bankGuaranteeAppNo }}</td>
           <td>{{ courtCase.courtName }}</td>
           <td jhiTranslate="{{ 'eCourtApp.CourtType.' + courtCase.courtType }}">{{ courtCase.courtType }}</td>
+          <td jhiTranslate="{{ 'eCourtApp.CaseType.' + courtCase.caseType }}">{{ courtCase.caseType }}</td>
           <td>{{ courtCase.isActivated }}</td>
           <td>{{ courtCase.freefield1 }}</td>
           <td>{{ courtCase.freefield2 }}</td>

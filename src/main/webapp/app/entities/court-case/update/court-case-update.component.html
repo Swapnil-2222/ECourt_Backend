@@ -379,6 +379,14 @@
         </div>
 
         <div class="row mb-3">
+          <label class="form-label" jhiTranslate="eCourtApp.courtCase.caseType" for="field_caseType">Case Type</label>
+          <select class="form-control" name="caseType" formControlName="caseType" id="field_caseType" data-cy="caseType">
+            <option [ngValue]="null">{{ 'eCourtApp.CaseType.null' | translate }}</option>
+            <option *ngFor="let caseType of caseTypeValues" [value]="caseType">{{ 'eCourtApp.CaseType.' + caseType | translate }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
           <label class="form-label" jhiTranslate="eCourtApp.courtCase.isActivated" for="field_isActivated">Is Activated</label>
           <input
             type="checkbox"

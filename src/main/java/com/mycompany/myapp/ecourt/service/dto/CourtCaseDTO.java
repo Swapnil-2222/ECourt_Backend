@@ -1,6 +1,7 @@
 package com.mycompany.myapp.ecourt.service.dto;
 
 import com.mycompany.myapp.ecourt.domain.enumeration.CaseStatus;
+import com.mycompany.myapp.ecourt.domain.enumeration.CaseType;
 import com.mycompany.myapp.ecourt.domain.enumeration.CourtType;
 import com.mycompany.myapp.ecourt.domain.enumeration.NatureResult;
 import java.io.Serializable;
@@ -74,6 +75,8 @@ public class CourtCaseDTO implements Serializable {
     private String courtName;
 
     private CourtType courtType;
+
+    private CaseType caseType;
 
     private Boolean isActivated;
 
@@ -359,6 +362,14 @@ public class CourtCaseDTO implements Serializable {
         this.courtType = courtType;
     }
 
+    public CaseType getCaseType() {
+        return caseType;
+    }
+
+    public void setCaseType(CaseType caseType) {
+        this.caseType = caseType;
+    }
+
     public Boolean getIsActivated() {
         return isActivated;
     }
@@ -528,6 +539,7 @@ public class CourtCaseDTO implements Serializable {
             ", bankGuaranteeAppNo='" + getBankGuaranteeAppNo() + "'" +
             ", courtName='" + getCourtName() + "'" +
             ", courtType='" + getCourtType() + "'" +
+            ", caseType='" + getCaseType() + "'" +
             ", isActivated='" + getIsActivated() + "'" +
             ", freefield1='" + getFreefield1() + "'" +
             ", freefield2='" + getFreefield2() + "'" +

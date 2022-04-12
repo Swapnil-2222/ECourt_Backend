@@ -4,6 +4,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { CaseStatus } from 'app/entities/enumerations/case-status.model';
 import { NatureResult } from 'app/entities/enumerations/nature-result.model';
 import { CourtType } from 'app/entities/enumerations/court-type.model';
+import { CaseType } from 'app/entities/enumerations/case-type.model';
 import { ICourtCase, CourtCase } from '../court-case.model';
 
 import { CourtCaseService } from './court-case.service';
@@ -55,6 +56,7 @@ describe('CourtCase Service', () => {
       bankGuaranteeAppNo: 'AAAAAAA',
       courtName: 'AAAAAAA',
       courtType: CourtType.DISTRICTCOURT,
+      caseType: CaseType.LARSEC18,
       isActivated: false,
       freefield1: 'AAAAAAA',
       freefield2: 'AAAAAAA',
@@ -134,6 +136,7 @@ describe('CourtCase Service', () => {
           bankGuaranteeAppNo: 'BBBBBB',
           courtName: 'BBBBBB',
           courtType: 'BBBBBB',
+          caseType: 'BBBBBB',
           isActivated: true,
           freefield1: 'BBBBBB',
           freefield2: 'BBBBBB',
@@ -174,13 +177,13 @@ describe('CourtCase Service', () => {
           amountDepositeInCourt: 'BBBBBB',
           depositedChequeNo: 'BBBBBB',
           addInterestAmountDistCourt: 'BBBBBB',
-          isActivated: true,
+          caseType: 'BBBBBB',
+          freefield1: 'BBBBBB',
           freefield2: 'BBBBBB',
-          freefield3: 'BBBBBB',
-          freefield5: 'BBBBBB',
+          freefield4: 'BBBBBB',
+          freefield7: 'BBBBBB',
           freefield8: 'BBBBBB',
-          freefield9: 'BBBBBB',
-          lastModifiedBy: 'BBBBBB',
+          freefield10: 'BBBBBB',
         },
         new CourtCase()
       );
@@ -231,6 +234,7 @@ describe('CourtCase Service', () => {
           bankGuaranteeAppNo: 'BBBBBB',
           courtName: 'BBBBBB',
           courtType: 'BBBBBB',
+          caseType: 'BBBBBB',
           isActivated: true,
           freefield1: 'BBBBBB',
           freefield2: 'BBBBBB',
@@ -295,7 +299,7 @@ describe('CourtCase Service', () => {
       });
 
       it('should add only unique CourtCase to an array', () => {
-        const courtCaseArray: ICourtCase[] = [{ id: 123 }, { id: 456 }, { id: 24224 }];
+        const courtCaseArray: ICourtCase[] = [{ id: 123 }, { id: 456 }, { id: 47505 }];
         const courtCaseCollection: ICourtCase[] = [{ id: 123 }];
         expectedResult = service.addCourtCaseToCollectionIfMissing(courtCaseCollection, ...courtCaseArray);
         expect(expectedResult).toHaveLength(3);

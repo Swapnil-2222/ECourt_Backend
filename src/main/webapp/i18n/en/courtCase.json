@@ -49,6 +49,7 @@
       "bankGuaranteeAppNo": "Bank Guarantee App No",
       "courtName": "Court Name",
       "courtType": "Court Type",
+      "caseType": "Case Type",
       "isActivated": "Is Activated",
       "freefield1": "Freefield 1",
       "freefield2": "Freefield 2",
