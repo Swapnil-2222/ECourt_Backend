@@ -6,4 +6,6 @@ export enum CaseType {
   FIRSTAPPEAL = 'FirstAppeal',
 
   CIVILMA = 'CivilMA',
+
+  OTHERS = 'Others',
 }

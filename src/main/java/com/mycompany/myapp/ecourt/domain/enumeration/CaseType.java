@@ -7,7 +7,8 @@ public enum CaseType {
     LARSEC18("LarSec18"),
     DARKHAST("Darkhast"),
     FIRSTAPPEAL("FirstAppeal"),
-    CIVILMA("CivilMA");
+    CIVILMA("CivilMA"),
+    OTHERS("Others");
 
     private final String value;
 

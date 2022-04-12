@@ -135,7 +135,7 @@
     {
       "fieldName": "caseType",
       "fieldType": "CaseType",
-      "fieldValues": "LARSEC18 (LarSec18),DARKHAST (Darkhast),FIRSTAPPEAL (FirstAppeal),CIVILMA (CivilMA)"
+      "fieldValues": "LARSEC18 (LarSec18),DARKHAST (Darkhast),FIRSTAPPEAL (FirstAppeal),CIVILMA (CivilMA),OTHERS (Others)"
     },
     {
       "fieldName": "isActivated",
